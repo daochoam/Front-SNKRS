@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { BsHeart } from "react-icons/bs";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 import PropTypes from "prop-types";
 import "./Detail.css";
 import { addCartItemsById } from "../../redux/cartSlice";
@@ -10,38 +10,54 @@ import Swal from "sweetalert2";
 import TopSales from "../TopSales/TopSales";
 import BeMember from "../../components/BeMember/BeMember";
 
-import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Footer from "../../components/Footer/Footer";
 import InfoUser from "../InfoUser/InfoUser";
-import { fetchColors, fetchSizes } from "../../redux/filters";
 import { fetchDetail } from "../../redux/products";
+import { readCookieSession } from "../../services";
+import { fetchColors, fetchSizes } from "../../redux/filters";
+import { addFavorites, fetchFavorites, removeFavorites } from "../../redux/favorites";
+import { NotLogin } from "../Alerts";
 import { ICONS } from "../../const";
 
 const Detail = () => {
-  // Obtén el parámetro de la URL que contiene el ID de la zapatilla
   const dispatch = useDispatch();
   const { id } = useParams();
-  // const [zapatilla, setZapatilla] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null)
+  const [isStock, setIsColor] = useState({})
+  const favorites = useSelector(({ favorites }) => favorites.favorites)
   const zapatilla = useSelector(({ products }) => products.detail)
+  console.log("🚀 ~ file: Detail.jsx:32 ~ Detail ~ zapatilla:", zapatilla)
   const colors = useSelector(({ filters }) => filters.data.colors)
   const sizes = useSelector(({ filters }) => filters.data.sizes)
+  const cookie = readCookieSession()
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  useEffect(() => {
+    scrollToTop()
+  }, [])
 
   useEffect(() => {
     dispatch(fetchColors())
     dispatch(fetchDetail(id))
+    dispatch(fetchFavorites())
+
   }, [dispatch, id])
-  // Función para manejar el clic en un botón de tamaño
+
 
   useEffect(() => {
     dispatch(fetchSizes(zapatilla.gender))
   }, [dispatch, zapatilla])
 
   const handleSizeClick = (size) => {
-    console.log(size)
     const currentSize = size
     if (currentSize !== selectedSize) {
       return setSelectedSize(currentSize)
@@ -50,6 +66,7 @@ const Detail = () => {
   };
 
   const handleColorClick = (color) => {
+    console.log("🚀 ~ file: Detail.jsx:69 ~ handleColorClick ~ color:", color)
     const currentColor = color
     if (currentColor !== selectedColor) {
       return setSelectedColor(color)
@@ -117,6 +134,19 @@ const Detail = () => {
     autoplaySpeed: 2000,
     centerMode: false,
   };
+
+  const handlerChangeFavorites = (event) => {
+    event.preventDefault();
+    if (cookie) {
+      if (favorites?.includes(id)) {
+        dispatch(removeFavorites(id));
+      } else {
+        dispatch(addFavorites(id));
+      }
+    } else {
+      NotLogin()
+    }
+  }
   return (
     <>
       <div className="detail-container">
@@ -152,12 +182,13 @@ const Detail = () => {
                   <h2>Size (US)</h2>
                   <div className="size">
                     {sizes.map((size, index) => {
+                      const isSizeAvailable = zapatilla?.stock?.some((shoe) => shoe.size == size);
                       return (
                         <a
                           key={index}
-                          href="#"
-                          onClick={() => handleSizeClick(size)}
+                          onClick={isSizeAvailable ? () => handleSizeClick(size) : null}
                           className={selectedSize === size ? "selected" : ""}
+                          style={{ opacity: !isSizeAvailable ? 0.3 : 1, cursor: !isSizeAvailable ? 'not-allowed' : 'pointer' }}
                         >{size}</a>
                       )
                     })}
@@ -167,14 +198,17 @@ const Detail = () => {
                   <h2>Color </h2>
                   <div className="Colors">
                     {colors.map(({ name, html }, index) => {
+                      const isColorAvailable = zapatilla?.stock?.some(({ color }) => color.name === name);
                       return (
                         <a
                           key={index}
-                          href="#"
-                          onClick={() => handleColorClick(name)}
-                          className={selectedColor === name ? "selected" : ""}
-                        ><h3 title={name}>{ICONS.COLORS(html)}</h3></a>
-                      )
+                          onClick={isColorAvailable ? () => handleColorClick(name) : null}
+                          className={`${selectedColor === name ? "SelectedColor" : ""} `}
+                          style={{ opacity: !isColorAvailable ? 0.3 : 1, cursor: !isColorAvailable ? 'not-allowed' : 'pointer' }}
+                        >
+                          <h3 title={name}>{ICONS.COLORS(html)}</h3>
+                        </a>
+                      );
                     })}
                   </div>
                 </div>
@@ -186,11 +220,11 @@ const Detail = () => {
                 ADD TO CART
               </button>
 
-              <Link to="/user/favorites">
+              <div style={{ cursor: 'pointer' }} onClick={handlerChangeFavorites}>
                 <p className="heart">
-                  <BsHeart />
+                  {favorites.includes(id) ? <BsHeartFill fill={'red'} /> : <BsHeart fill={'white'} />}
                 </p>
-              </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -198,7 +232,7 @@ const Detail = () => {
         <TopSales />
         <BeMember />
         <Footer />
-      </div>
+      </div >
     </>
   );
 };

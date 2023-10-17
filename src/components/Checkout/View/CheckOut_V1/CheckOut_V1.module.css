@@ -1,7 +1,9 @@
 .checkout {
-  position: relative;
-  display: flex;
-  font-family: MontHeavy;
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr;
+  /* Dos columnas de igual ancho */
+  grid-template-rows: auto;
+  /* Altura automática */
 }
 
 .inputWrapper {
@@ -13,7 +15,7 @@
   background: black;
   color: white;
   padding: 20px;
-  flex: 1;
+
 }
 
 .rightPanel {
@@ -34,7 +36,7 @@
   font-family: MontLight;
   color: #ffffff;
   margin-left: 60px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .payment {
@@ -53,8 +55,8 @@
 }
 
 .formContainer {
-  margin-left: 50px;
-  margin-right: 50px;
+  width: 100%;
+  padding: 0px 50px;
 }
 
 .box {
@@ -113,6 +115,7 @@
 }
 
 .label {
+  font-size: 180%;
   margin-left: 20px;
   font-family: MontHeavy;
   width: 45%;
@@ -148,6 +151,17 @@
   text-align: center;
 }
 
+.infoCheckout {
+  position: static;
+  margin-top: 90px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
 .button {
   background-color: white;
   border: 1px solid #ccc;
@@ -176,4 +190,8 @@
 .InputSelect {
   width: 45%;
   margin: 8px 0;
+}
+
+.leftPanel {
+  height: 100%;
 }

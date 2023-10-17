@@ -1,14 +1,10 @@
 .CheckOutContainer {
     position: relative;
-    top: 80px;
-    margin-bottom: 80px;
     display: flex;
     width: 100vw;
-    height: auto;
+    height: 100%;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: stretch;
-    align-content: space-around;
-    margin-bottom: 80px;
 }

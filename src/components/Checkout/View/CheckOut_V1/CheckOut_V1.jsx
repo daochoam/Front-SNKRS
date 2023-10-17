@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { fetchCity, fetchCountry, fetchState } from "../../../../redux/country";
 import { InputSelect } from "../../../Inputs";
 import { getCartItems } from "../../../../redux/cartSlice";
+import Footer from "../../../Footer/Footer";
 // eslint-disable-next-line react/prop-types
 const CheckOut_V1 = () => {
   const country = useSelector(({ country }) => {
@@ -157,160 +158,162 @@ const CheckOut_V1 = () => {
   return (
     <div className={styles.checkout}>
       <div className={styles.leftPanel}>
-        <h1 className={styles.title}>Checkout</h1>
-        <h2 className={styles.h2}>Delivery</h2>
-        <div className={styles.formContainer}>
-          <form>
-            {/* <div className={styles.box}>
-              <input type="checkbox" id="autocomplete" name="autocomplete" />
-              <label className={styles.label} htmlFor="autocomplete">
-                Autocomplete information?
-              </label>
-            </div> */}
-            <div className={styles.inputGroup}>
-              <div className={styles.inputWrapper}>
-                <label className={styles.label}> First Name: </label>
-                <input
-                  placeholder="First Name"
-                  className={`${styles.input} ${formErrors.firstName && styles.errorInput
-                    }`}
-                  type="text"
-                  id="firstNameInput"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                />
-                {formErrors.firstName && (
-                  <div className={styles.errorText}>{formErrors.firstName}</div>
-                )}
-              </div>
-              <div className={styles.inputWrapper}>
-                <label className={styles.label}> Last Name: </label>
-                <input
-                  placeholder="Last Name"
-                  className={`${styles.input} ${formErrors.lastName && styles.errorInput
-                    }`}
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                />
-                {formErrors.lastName && (
-                  <div className={styles.errorText}>{formErrors.lastName}</div>
-                )}
-              </div>
-              {Object.keys(formData).map((key, index) => {
-                return (
-                  <div key={index}>
-                    {["country", "state", "city"].includes(key) && (
-                      <div className={styles.WrapperCountry}>
-                        <label className={styles.label}>
-                          {key.charAt(0).toUpperCase() + key.slice(1)}:{" "}
-                        </label>
-                        <div className={styles.InputSelect}>
-                          <InputSelect
-                            options={
-                              key === "country"
-                                ? country
-                                : key === "state"
-                                  ? state
-                                  : city
-                            }
-                            initInput={formData[key]}
-                            onChangeSelect={(input) =>
-                              handlerInputChange(key, input)
-                            }
+        <div className={styles.infoCheckout}>
+          <h1 className={styles.title}>Checkout</h1>
+          <h2 className={styles.h2}>Delivery</h2>
+          <div className={styles.formContainer}>
+            <form>
+              {/* <div className={styles.box}>
+                <input type="checkbox" id="autocomplete" name="autocomplete" />
+                <label className={styles.label} htmlFor="autocomplete">
+                  Autocomplete information?
+                </label>
+              </div> */}
+              <div className={styles.inputGroup}>
+                <div className={styles.inputWrapper}>
+                  <label className={styles.label}> First Name: </label>
+                  <input
+                    placeholder="First Name"
+                    className={`${styles.input} ${formErrors.firstName && styles.errorInput
+                      }`}
+                    type="text"
+                    id="firstNameInput"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                  />
+                  {formErrors.firstName && (
+                    <div className={styles.errorText}>{formErrors.firstName}</div>
+                  )}
+                </div>
+                <div className={styles.inputWrapper}>
+                  <label className={styles.label}> Last Name: </label>
+                  <input
+                    placeholder="Last Name"
+                    className={`${styles.input} ${formErrors.lastName && styles.errorInput
+                      }`}
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                  />
+                  {formErrors.lastName && (
+                    <div className={styles.errorText}>{formErrors.lastName}</div>
+                  )}
+                </div>
+                {Object.keys(formData).map((key, index) => {
+                  return (
+                    <div key={index}>
+                      {["country", "state", "city"].includes(key) && (
+                        <div className={styles.WrapperCountry}>
+                          <label className={styles.label}>
+                            {key.charAt(0).toUpperCase() + key.slice(1)}:{" "}
+                          </label>
+                          <div className={styles.InputSelect}>
+                            <InputSelect
+                              options={
+                                key === "country"
+                                  ? country
+                                  : key === "state"
+                                    ? state
+                                    : city
+                              }
+                              initInput={formData[key]}
+                              onChangeSelect={(input) =>
+                                handlerInputChange(key, input)
+                              }
 
-                            style={{
-                              flexDirection: "row",
-                              alignItems: "flex-start",
-                              select: {
-                                backgroundColor: "#101010",
-                                color: "white",
-                                fontFamily: "MontLight",
-                                borderColor: "white",
-                                border: "2px solid white",
-                              },
-                              DateFile: {
-                                justifyContent: "flex-end",
-                                background: "black",
-                                alignItems: 'start',
-                              },
-                              input: {
-                                width: '100%',
-                                background: "rgb(217, 217, 217)",
-                              },
-                            }}
-                          />
+                              style={{
+                                flexDirection: "row",
+                                alignItems: "flex-start",
+                                select: {
+                                  backgroundColor: "#101010",
+                                  color: "white",
+                                  fontFamily: "MontLight",
+                                  borderColor: "white",
+                                  border: "2px solid white",
+                                },
+                                DateFile: {
+                                  justifyContent: "flex-end",
+                                  background: "black",
+                                  alignItems: 'start',
+                                },
+                                input: {
+                                  width: '100%',
+                                  background: "rgb(217, 217, 217)",
+                                },
+                              }}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                      )}
+                    </div>
+                  );
+                })}
 
-              <label className={styles.label}>Address: </label>
-              <input
-                placeholder="Hollywood Boulevard"
-                className={styles.input}
-                type="text"
-                id="address"
-                name="address"
-                value={formData.address}
-                onChange={handleInputChange}
-              />
-              <div className={styles.inputWrapper}>
-                <label className={styles.label}> Email: </label>
+                <label className={styles.label}>Address: </label>
                 <input
-                  placeholder="mail@mail.com"
-                  className={`${styles.input} ${formErrors.email && styles.errorInput
-                    }`}
+                  placeholder="Hollywood Boulevard"
+                  className={styles.input}
                   type="text"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  id="address"
+                  name="address"
+                  value={formData.address}
                   onChange={handleInputChange}
                 />
-                {formErrors.email && (
-                  <div className={styles.errorText}>{formErrors.email}</div>
-                )}
+                <div className={styles.inputWrapper}>
+                  <label className={styles.label}> Email: </label>
+                  <input
+                    placeholder="mail@mail.com"
+                    className={`${styles.input} ${formErrors.email && styles.errorInput
+                      }`}
+                    type="text"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                  />
+                  {formErrors.email && (
+                    <div className={styles.errorText}>{formErrors.email}</div>
+                  )}
+                </div>
+                <div className={styles.inputWrapper}>
+                  <label className={styles.label}> Phone: </label>
+                  <input
+                    placeholder="5555 555 555"
+                    className={`${styles.input} ${formErrors.phone && styles.errorInput
+                      }`}
+                    type="text"
+                    inputMode="numeric"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    onKeyPress={(e) => {
+                      if (!/[0-9]/.test(e.key) || formData.phone.length >= 10) {
+                        e.preventDefault();
+                      }
+                    }}
+                    maxLength="10"
+                  />
+                  {formErrors.phone && (
+                    <div className={styles.errorText}>{formErrors.phone}</div>
+                  )}
+                </div>
               </div>
-              <div className={styles.inputWrapper}>
-                <label className={styles.label}> Phone: </label>
-                <input
-                  placeholder="5555 555 555"
-                  className={`${styles.input} ${formErrors.phone && styles.errorInput
-                    }`}
-                  type="text"
-                  inputMode="numeric"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  onKeyPress={(e) => {
-                    if (!/[0-9]/.test(e.key) || formData.phone.length >= 10) {
-                      e.preventDefault();
-                    }
-                  }}
-                  maxLength="10"
-                />
-                {formErrors.phone && (
-                  <div className={styles.errorText}>{formErrors.phone}</div>
-                )}
-              </div>
-            </div>
-          </form>
-        </div>
-        <h2 className={styles.payment}>Payment</h2>
-        <div>
-          <p className={styles.p}>
-            You will be redirected to the Mercado Pago site after reviewin your
-            order
-          </p>
-        </div>
-        <div id="wallet_container">
-          {token && <Wallet initialization={{ preferenceId: token }} />}
+            </form>
+          </div>
+          <h2 className={styles.payment}>Payment</h2>
+          <div>
+            <p className={styles.p}>
+              You will be redirected to the Mercado Pago site after reviewin your
+              order
+            </p>
+          </div>
+          <div id="wallet_container">
+            {token && <Wallet initialization={{ preferenceId: token }} />}
+          </div>
         </div>
       </div>
       <div className={styles.rightPanel}>

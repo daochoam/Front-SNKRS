@@ -45,6 +45,9 @@ export const cartSlice = createSlice({
       }
       axiosInstance.put(`/trolley/quantityPick/less/${action.payload}`);
     },
+    cleanTrolley: (state, action) => {
+      state.cartItems = [];
+    }
   },
 });
 
@@ -74,12 +77,13 @@ export const addCartItemsById = (item) => async (dispatch) => {
     image: item.image,
   };
   try {
-    const res = await axiosInstance.get(`/trolley`);
-    if (
-      res.find(
-        (e) => e.Product_id == product.Product_id && e.size == product.size && e.color.name == product.color.name
-      )
-    ) {
+    const trolley = await axiosInstance.get(`/trolley`);
+    const data = trolley.find((e) =>
+      e.Product_id == product.Product_id &&
+      e.size == product.size &&
+      e.color.name == product.color.name)
+
+    if (data) {
       Swal.fire({
         icon: "warning",
         title: "The Shoes has already been added",
@@ -126,6 +130,7 @@ export const {
   addToCart,
   removeFromCart,
   clearCart,
+  cleanTrolley,
   itemIncrement,
   itemDecrement,
   setUserId,

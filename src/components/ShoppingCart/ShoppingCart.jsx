@@ -137,7 +137,7 @@ const ShoppingCart = () => {
                       </td>
                       <td>
                         <img
-                          src={item?.image[0]?.src}
+                          src={item?.image}
                           alt={item?.name}
                           className={styles.itemImage}
                         />

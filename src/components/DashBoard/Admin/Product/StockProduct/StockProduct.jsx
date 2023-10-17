@@ -18,6 +18,7 @@ const StockProduct = ({ initStock, onChangeStockProduct, errors, model = '', gen
     const [isHovered, setIsHovered] = useState({ 0: { minus: false, plus: false } })
     const [filtered, setFiltered] = useState([])
     const [stock, setStock] = useState(initInfoStock)
+    console.log("🚀 ~ file: StockProduct.jsx:21 ~ StockProduct ~ stock:", stock)
     const [filter, setFilter] = useState({ color: '', size: '' })
     const colors = useSelector(({ filters }) => filters.data.colors)
     const sizes = useSelector(({ filters }) => filters.data.sizes)
@@ -57,14 +58,10 @@ const StockProduct = ({ initStock, onChangeStockProduct, errors, model = '', gen
     }
     const handlerChangeQuantity = (event, index) => {
         event.preventDefault();
+        let updateData = [...stock]
         const { name, value } = event.target;
-
-        // Clona el arreglo de stock y actualiza el valor de quantity para el índice específico
-        const updatedStock = [...stock];
-        updatedStock[index].quantity = value;
-
-        // Actualiza el estado con el nuevo arreglo actualizado
-        setStock(updatedStock);
+        updateData[index].quantity = Math.abs(value)
+        return setStock(updateData)
     }
 
     const handlerClickQuantity = (event, index, button) => {

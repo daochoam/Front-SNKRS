@@ -71,25 +71,28 @@ const Navbar = ({ NavColor = '#ffffff', LogoColor = 'black' }) => {
                     {MEN.includes(pathname) ? <Link to='/men'><h2>MEN</h2></Link> : null}
                     {KIDS.includes(pathname) ? <Link to='/kids'><h2>KIDS</h2></Link> : null}
                     {KIDS.includes(pathname) ? "" : null}
-                    {role != 'admin' ? FAVORITE.includes(pathname) ?
+                    {/* //? FAVORITES */}
+                    {role != 'admin' ? FAVORITE.includes(pathname) || DETAIL_PAGE(pathname) ?
 
                         <Link to={role == 'user' ? MENU_USER.favorites.route || DETAIL_PAGE(pathname) : null}>
                             <h3 title='favorites' onClick={handlerChangeFavorite}>{ICONS.FAVORITE('black')}</h3></Link> :
                         null : null}
+                    {/* //? TROLLEY */}
                     {(role != 'admin' && (TROLLEY.includes(pathname) || DETAIL_PAGE(pathname))) ?
                         <h3>
-                            {" "}
                             <Link to={role == "user" ? MENU_USER.shopping.route : "/trolley"}>
                                 <h3 title='shopping cart'>
                                     {ICONS.TROLLEY("black")}
-                                    <span className={styles.cartCounter}> {cartItems.length} </span>
+                                    {cartItems.length > 0 && <span className={styles.cartCounter}> {cartItems.length} </span>}
                                 </h3>
                             </Link>
                         </h3>
                         : null}
+                    {/* //? LOGIN */}
                     {LOGIN.includes(pathname) || DETAIL_PAGE(pathname) ? <LogIn /> : null}
                 </div>
             </div>
+            {/* //? BACK TO HOME*/}
             <div className={`${styles.BackHomeContainer} ${styles.NavbarLinks} ${isNavbarVisible ? styles.BackHome : styles.BackHomeOnly}`}>
                 {HOME.includes(pathname) || DETAIL_PAGE(pathname) ?
                     <Link to={SESSION_NOT_COOKIE}>
@@ -98,7 +101,7 @@ const Navbar = ({ NavColor = '#ffffff', LogoColor = 'black' }) => {
                     : null}
                 {!isNavbarVisible && NAVBAR_LINKS.HOME.includes(pathname) &&
                     <div onClick={scrollToTop} style={{ cursor: 'pointer' }}>
-                        <div className={`${styles.BackHomeOnly}`}><h2 style={{ marginBotton: '20px' }}>{pathname.slice(1).toUpperCase()}</h2></div>
+                        <div className={`${styles.BackHomeOnly} ${styles.Gender}`}><h2 style={{ marginBotton: '20px' }}>{pathname.slice(1).toUpperCase()}</h2></div>
                     </div>}
             </div>
         </div >

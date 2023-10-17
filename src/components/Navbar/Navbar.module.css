@@ -36,7 +36,7 @@
     text-decoration: none;
     color: #101010;
     text-align: center;
-    padding-top: 10px;
+    margin: 0;
 }
 
 .NavbarLinks h2 {
@@ -132,4 +132,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+}
+
+.Gender {
+    transform: translateY(0%);
 }

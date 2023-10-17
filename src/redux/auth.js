@@ -7,6 +7,7 @@ import { setCookieSession, readCookieSession, removeCookieSession } from '../ser
 import { logOut } from '../services/firebase';
 import { Signed } from '../components/Alerts';
 import { cleanFavorites, fetchFavorites } from './favorites.js';
+import { cleanTrolley, getCartItems } from './cartSlice.js';
 
 const initialState = {
     view: false,
@@ -44,8 +45,8 @@ export const signIn = (userCredentials) => async (dispatch) => {
             setCookieSession(SESSION_NAME, data)
             dispatch(setLogIn())
             dispatch(fetchFavorites())
+            dispatch(getCartItems())
             Signed()
-
         } else {
             console.error('Error when closing session')
         }
@@ -61,6 +62,7 @@ export const signOut = () => async (dispatch) => {
         await axiosInstance.post(`/auth/sign-out`)
         dispatch(setLogOut());
         dispatch(cleanFavorites())
+        dispatch(cleanTrolley())
         removeCookieSession()
         await logOut()
         return

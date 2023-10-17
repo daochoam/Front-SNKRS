@@ -20,22 +20,22 @@ const Bag = () => {
   );
   const total = subtotal;
   return (
-<div className={styles.shoppingCart}>
+    <div className={styles.shoppingCart}>
       {cartItems?.length > 0 && (
         <div className={styles.tableContainer}>
-            <div className={styles.totalContainer}>
-        <h3>Total: ${total.toFixed(2)}</h3>
-      </div>
+          <div className={styles.totalContainer}>
+            <h3>Total: ${total.toFixed(2)}</h3>
+          </div>
           <table className={styles.table}>
             <tbody>
               {cartItems?.map((item) => (
                 <tr key={item._id} className={styles.cartItem}>
                   <td>
-                    <img src={item?.image[0]?.src} alt={item?.name} />
+                    <img src={item?.image} alt={item?.model} />
                   </td>
                   <td className={styles.cartItemDetails}>
                     <div>Size: {item.size}</div>
-                    <div>Color: {item.color}</div>
+                    <div>Color: {item?.color?.name}</div>
                     <div>Quantity: {item.quantity}</div>
                     <div>Price by unit: $ {item.price}</div>
                     <div>Subtotal: $ {item.price * item.quantity}</div>
@@ -46,7 +46,7 @@ const Bag = () => {
           </table>
         </div>
       )}
-      
+
     </div>
   );
 };
