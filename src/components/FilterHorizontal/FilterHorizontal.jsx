@@ -82,11 +82,7 @@ const FilterHorizontal = ({ onChangeFilter }) => {
           <span className={styles.KeyData}>SORT</span>
           <select
             name="sort"
-            style={{
-              width: "160px",
-              borderBottom: "5px solid black",
-              borderInlineEnd: "2px solid black",
-            }}
+            className={styles.data}
             value={selectedOptions.sort}
             onChange={(e) => handleFilterChange('sort', e.target.value)}
           >
@@ -99,11 +95,7 @@ const FilterHorizontal = ({ onChangeFilter }) => {
           <span className={styles.KeyData}>BRAND</span>
           <select
             name="brand"
-            style={{
-              width: "160px",
-              borderBottom: "5px solid black",
-              borderInlineEnd: "2px solid black",
-            }}
+            className={styles.data}
             value={selectedOptions.brand}
             onChange={(e) => handleFilterChange('brand', e.target.value)}
           >
@@ -119,11 +111,7 @@ const FilterHorizontal = ({ onChangeFilter }) => {
           <span className={styles.KeyData}>TYPE</span>
           <select
             name="type"
-            style={{
-              width: "160px",
-              borderBottom: "5px solid black",
-              borderInlineEnd: "2px solid black",
-            }}
+            className={styles.data}
             value={selectedOptions.type}
             onChange={(e) => handleFilterChange('type', e.target.value)}
           >
@@ -139,11 +127,7 @@ const FilterHorizontal = ({ onChangeFilter }) => {
           <span className={styles.KeyData}>SIZE</span>
           <select
             name="size"
-            style={{
-              width: "160px",
-              borderBottom: "5px solid black",
-              borderInlineEnd: "2px solid black",
-            }}
+            className={styles.data}
             value={selectedOptions.size}
             onChange={(e) => handleFilterChange('size', e.target.value)}
           >
@@ -159,11 +143,8 @@ const FilterHorizontal = ({ onChangeFilter }) => {
           <span className={styles.KeyData}>COLOR</span>
           <select
             name="color"
-            style={{
-              width: "160px",
-              borderBottom: "5px solid black",
-              borderInlineEnd: "2px solid black",
-            }}
+            className={styles.data}
+
             value={selectedOptions.color}
             onChange={(e) => handleFilterChange('color', e.target.value)}
           >

@@ -42,8 +42,11 @@ const Customer = () => {
                     <option value="banned">Banned</option>
                 </select>
             ),
-            confirmButtonText: 'Save',
             showCancelButton: true,
+            showConfirmButton: true,
+            cancelButtonText: "Cancel",
+            confirmButtonText: "Update",
+
         }).then((result) => {
             if (result.isConfirmed) {
                 const selectValue = document.getElementById('swal-select').value;

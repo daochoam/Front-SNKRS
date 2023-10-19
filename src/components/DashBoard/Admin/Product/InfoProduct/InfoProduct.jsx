@@ -27,8 +27,6 @@ const InfoProduct = ({ initInfoProduct = {}, onChangeInfoProduct, errors }) => {
    const categories = useSelector(({ filters }) => filters.data.categories)
    const colors = useSelector(({ filters }) => filters.data.colors)
 
-   console.log("🚀 ~ file: InfoProduct.jsx:24 ~ InfoProduct ~ infoProduct:", infoProduct)
-
    useEffect(() => {
       setInfoProduct(initInfoProduct)
    }, [initInfoProduct])

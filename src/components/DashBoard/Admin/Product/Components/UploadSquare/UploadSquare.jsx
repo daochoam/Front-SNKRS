@@ -13,8 +13,6 @@ const UploadSquare = ({ onImageUpload, colors }) => {
   const [color, setColor] = useState(null);
   const [colorChange, setColorChange] = useState(false);
 
-  console.log("🚀 ~ file: UploadSquare.jsx:9 ~ UploadSquare ~ imageFiles:", imageFiles)
-
   const handlerFileChange = (event) => {
     const newFiles = Array.from(event.target.files);
     if (color) {

@@ -14,7 +14,6 @@ const handlerFieldStock = (colors, sizes) => {
             objStock.push(obj);
         }
     }
-    console.log("🚀 ~ file: handlerFieldStock.js:15 ~ handlerFieldStock ~ objStock:", objStock)
     return objStock;
 }
 

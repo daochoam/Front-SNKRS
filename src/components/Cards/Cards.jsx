@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import logo from "../../assets/Image/Logo.png";
@@ -17,7 +19,7 @@ import { NotLogin } from "../Alerts";
 import { readCookieSession } from "../../services";
 import { ICONS } from "../../const";
 
-const Cards = ({ products }) => {
+const Cards = ({ products, style }) => {
   const cookie = readCookieSession();
   const dispatch = useDispatch();
   const favorites = useSelector(({ favorites }) => {
@@ -46,16 +48,21 @@ const Cards = ({ products }) => {
     <>
       <div className={styles.product}>
         {products && products.length > 0 ? (
-          <div className={styles.cards}>
+          <div className={styles.cards} style={{
+            display: 'grid',
+            justifyContent: 'center',
+            width: '1000px',
+            textdecoration: 'none', gridTemplateColumns: 'repeat(3, 1fr)', ...style?.card
+          }}>
             {products?.map((zapa) => (
               <Link
-                to={`/detail/${zapa._id}`}
+                to={zapa._id !== '' ? `/detail/${zapa._id}` : ''}
                 className={styles.containe}
                 key={zapa._id}
                 style={{ textDecoration: "none" }}
               >
                 <div className={styles.card} key={zapa._id}>
-                  <img src={zapa?.image} alt={zapa.model} />
+                  <img className={styles.cardImage} src={zapa?.image} alt={zapa.model} />
 
                   <div className={styles.name}>
                     <h2>{zapa?.brand?.brand}</h2>
@@ -65,17 +72,14 @@ const Cards = ({ products }) => {
                     </div>
                   </div>
 
-                  <div className={styles.type}>
-                    <span className={styles.letra}>{zapa?.model}</span>
+                    <div className={styles.type}>
+                      <span className={styles.letra}>{zapa?.model}</span>
 
-                    <p>{zapa.type}</p>
-                    <br />
-                  </div>
-                  <div className={styles.Data}>
-                    <Link className={styles.start}>
-                      <FaStar /> <FaStar /> <FaStar /> <FaStar />{" "}
-                      <FaStarHalfAlt />
-                    </Link>
+                      <p>{zapa.type}</p>
+                      <br />
+                    </div>
+                  <div className={styles.colores}>
+
                     <div className={styles.ColorsCard}>
                       {[
                         ...new Set(
@@ -93,7 +97,7 @@ const Cards = ({ products }) => {
                         })}
                     </div>
 
-                    <img src={logo} alt="logo" width={70} />
+                    <img className={styles.cardLogo} src={logo} alt="logo" width={70} />
                   </div>
 
                   <button
@@ -120,11 +124,11 @@ const Cards = ({ products }) => {
       </div>
     </>
   );
-
 };
 
 Cards.propTypes = {
   products: PropTypes.array,
+  style: PropTypes.object,
 };
 
 export default Cards;

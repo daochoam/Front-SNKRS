@@ -33,9 +33,9 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/home" element={
-    
-            <HomeViews />
-      
+
+          <HomeViews />
+
         }
         />
         {/* <Route path="/user" element={<User />} /> */}
@@ -47,8 +47,8 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/checkout" element={<Payment />} />
         <Route path="/payment-succes" element={<PaymentSucces />} />
-        <Route path="/reviews/:id" element={<Views/>} />
-        
+        <Route path="/reviews/:id" element={<Views />} />
+
         {/* <Route path="/user" element={<DashboardUser />} /> */}
 
         {/* //?Routes USER */}

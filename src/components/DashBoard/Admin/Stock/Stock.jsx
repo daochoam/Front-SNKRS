@@ -87,26 +87,30 @@ const Stock = () => {
 
   const handlerUpdateProduct = (id, product) => {
     Swal.fire({
-      title: "Actualizar Producto",
+      title: "Update Product",
       html: `
+                <label> BRAND <label/>
                 <input type="text" id="brand" value="${product.brand.brand}" placeholder="Marca" required />
+                <label> MODEL <label/>
                 <input type="text" id="model" value="${product.model}" placeholder="Modelo" required />
+                <label> TYPE <label/>
                 <input type="text" id="category" value="${product.category}" placeholder="Categoría" required />
+                <label> GENDER <label/>
                 <input type="text" id="gender" value="${product.gender}" placeholder="Género" required />
+                <label> PRICE <label/>
                 <input type="number" id="price" value="${product.price}" placeholder="Precio" required />
-                <input type="number" id="stock" value="${product.stock[0].quantity}" placeholder="Stock" required />
             `,
       showCancelButton: true,
       showConfirmButton: true,
-      confirmButtonText: "Actualizar",
-      cancelButtonText: "Cancelar",
+      cancelButtonText: "Cancel",
+      confirmButtonText: "Update",
+
       preConfirm: () => {
         const brand = Swal.getPopup().querySelector("#brand").value;
         const model = Swal.getPopup().querySelector("#model").value;
         const category = Swal.getPopup().querySelector("#category").value;
         const gender = Swal.getPopup().querySelector("#gender").value;
         const price = Swal.getPopup().querySelector("#price").value;
-        const stock = Swal.getPopup().querySelector("#stock").value;
 
         axiosInstance
           .put(`/products/${id}`, { brand, model, category, gender, price })
@@ -136,7 +140,8 @@ const Stock = () => {
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete",
+      cancelButtonText: "Cancel",
+      confirmButtonText: "Yes, delete"
     }).then((result) => {
       if (result.isConfirmed) {
         axiosInstance
@@ -173,23 +178,21 @@ const Stock = () => {
           <h1>{MENU_ADMIN.stock.icon}</h1>STOCK...
         </label>
         <div className={styles.filter}>
-        <FilterHorizontal
-          onChangeFilter={handleFilterChange}
-          onSearch={handleSearchByBrand}
-        />
-        <div className={styles.searchBar}>
-          <div className="search-bar">
+          <FilterHorizontal
+            onChangeFilter={handleFilterChange}
+            onSearch={handleSearchByBrand}
+          />
+          <div className={styles.searchBar}>
             <input
               type="text"
               placeholder="Search..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button onClick={handleSearch}>Search</button>
+            {/* <button onClick={handleSearch}>Search</button> */}
             <button onClick={handleClearSearch}>Clear</button>{" "}
             {/* Agrega el botón Clear */}
           </div>
-        </div>
         </div>
         <div className={styles.TableData}>
           <table>

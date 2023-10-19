@@ -4,12 +4,11 @@ import axiosInstance from '../../../utils/axiosInstance';
 import ProductSuccess from './ProductSuccess';
 import ErrorProduct from './ErrorProduct';
 
-const ConfirmCreateProduct = (Product) => {
+const ConfirmCreateProduct = async (Product, formData, redirect) => {
     Swal.fire({
-        icon: 'error',
-        title: 'Error Creating Product',
-        text: 'Please verify the fields',
-        timer: 3000,
+        icon: '',
+        title: 'Creating Product...',
+        text: 'Want to create the current product',
         showCancelButton: true,
         confirmButtonText: 'Create',
         cancelButtonText: 'Cancel',
@@ -24,9 +23,7 @@ const ConfirmCreateProduct = (Product) => {
     }).then(async (result) => {
         if (result.isConfirmed) {
             try {
-                const { _id } = await axiosInstance.post(`/product`, Product)
-                await axiosInstance.put(`/product/${_id}`,)
-                ProductSuccess()
+                redirect(true)
             } catch (error) {
                 ErrorProduct()
             }

@@ -14,7 +14,7 @@ import handlerStockGteZero from './handlerStockGteZero';
 
 const initInfoStock = []
 
-const StockProduct = ({ initStock = [], onChangeStockProduct, errors, model = '', gender = '' }) => {
+const StockProduct = ({ initStock, onChangeStockProduct, errors, model = '', gender = '' }) => {
     const dispatch = useDispatch()
     const [isHovered, setIsHovered] = useState({ 0: { minus: false, plus: false } })
     const [filtered, setFiltered] = useState([])
@@ -24,37 +24,36 @@ const StockProduct = ({ initStock = [], onChangeStockProduct, errors, model = ''
     const sizes = useSelector(({ filters }) => filters.data.sizes)
 
     useEffect(() => {
-        setStock(handlerFieldStock(colors, sizes))
-    }, [colors, sizes])
+        setStock(handlerFieldStock(colors, sizes));
+    }, [colors, sizes]);
 
     useEffect(() => {
-        let stockValues
-        if (!stock.length) stockValues = handlerFieldStock(colors, sizes)
-        else stockValues = [...stock]
-
         if (initStock.length) {
+            const stockValues = handlerFieldStock(colors, sizes)
             initStock.forEach((initValue) => {
                 const matchItem = stockValues.find(({ size, color }) => {
-                    return (
-                        size === initValue.size &&
-                        color.name === initValue.color.name)
+                    return size === initValue.size && color.name === initValue.color.name;
                 });
+
                 if (matchItem) {
                     matchItem.quantity = initValue.quantity;
                 }
             });
             setStock(stockValues);
+
+        } else {
+            setStock(handlerFieldStock(colors, sizes));
         }
-    }, [initStock, stock, colors, sizes])
+    }, [initStock, colors, sizes]);
 
     useEffect(() => {
-        dispatch(fetchColors())
-        dispatch(fetchSizes(gender))
-    }, [dispatch, gender])
+        dispatch(fetchColors());
+        dispatch(fetchSizes(gender));
+    }, [dispatch, gender]);
 
     useEffect(() => {
-        setFiltered(handlerFilterStock(filter, stock))
-    }, [filter, stock])
+        setFiltered(handlerFilterStock(filter, stock));
+    }, [filter, stock]);
 
 
     const handlerChangeColor = (data) => {

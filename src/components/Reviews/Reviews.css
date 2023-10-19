@@ -141,7 +141,14 @@ textarea {
   flex-direction: column;
   width: 500px;
   margin:0;
-  margin-bottom: 70px;
+  margin-top: 70px;
+  
+}
+strong{
+  font-family: MontRegular;
+}
+span{
+  font-family: MontLight;
 }
 .data{
   display: flex;
@@ -161,9 +168,9 @@ textarea {
   font-family: MontLight;
 }
 .in{
-  margin-top: 60px;
+  
   border-bottom: 4px dotted #0000007b;
-  margin-bottom: 80px;
+  
 }
 .in h3{
   font-family: MontHeavy;
@@ -216,3 +223,45 @@ p {
   font-weight: bold;
   font-family: MontLight;
 }
+
+.rating-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.rating-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.rating-info {
+  
+  font-size: 18px;
+  margin: 10px 0;
+}
+.star-filled {
+  color: gold; /* Color para estrellas pintadas */
+}
+
+.star-outline {
+  color: #ddd; /* Color para estrellas sin pintar (puedes ajustarlo) */
+}
+
+
+/* Puedes ajustar estos estilos según tus preferencias de diseño */

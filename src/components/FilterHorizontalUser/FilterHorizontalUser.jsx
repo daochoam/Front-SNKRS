@@ -7,7 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setResults } from "../../redux/resultsMen"; // Asegúrate de importar la acción correcta
 import { InputSelect, InputText } from "../Inputs";
-import styles from "./FilterHorizontal.module.css";
+import styles from "./FilterHorizontalUser.module.css";
 import { fetchProducts, setProducts } from "../../redux/products";
 import { useLocation } from "react-router-dom";
 import { GENDER } from "../../const";
@@ -29,9 +29,6 @@ const FilterHorizontalUser = ({ onChangeFilter }) => {
 
   const dispatch = useDispatch();
   const [pageGender, setPageGender] = useState(1);
-  const products = useSelector(({ products }) => {
-    return products.products;
-  });
 
   const pages = useSelector(({ products }) => products.pages);
 
@@ -40,6 +37,11 @@ const FilterHorizontalUser = ({ onChangeFilter }) => {
     initFilters
   );
 
+  const clearFilters = () => {
+    setSelectedOptions(initFilters);
+    setSearchTerm("");
+    onChangeFilter("")
+  };
   ////////////////////////////////////////////SELECTS
   const genders = GENDER;
   const [infoProduct, setInfoProduct] = useState(initFilters);
@@ -56,8 +58,8 @@ const FilterHorizontalUser = ({ onChangeFilter }) => {
     const updatedOptions = { ...selectedOptions, [key]: value };
     setSelectedOptions(updatedOptions);
     onChangeFilter(updatedOptions); // Llama a onChangeFilter con las opciones actualizadas
-    console.log(updatedOptions);
   };
+
 
   return (
     <div className={styles.filter}>
@@ -65,11 +67,7 @@ const FilterHorizontalUser = ({ onChangeFilter }) => {
         <span className={styles.KeyData}>ORDER NAME</span>
         <select
           name="firstName"
-          style={{
-            width: "160px",
-            borderBottom: "5px solid black",
-            borderInlineEnd: "2px solid black",
-          }}
+          className={styles.data}
           value={selectedOptions.firstName}
           onChange={(e) => handleFilterChange("firstName", e.target.value)}
         >
@@ -83,11 +81,7 @@ const FilterHorizontalUser = ({ onChangeFilter }) => {
         <span className={styles.KeyData}>ORDER EMAIL</span>
         <select
           name="email"
-          style={{
-            width: "160px",
-            borderBottom: "5px solid black",
-            borderInlineEnd: "2px solid black",
-          }}
+          className={styles.data}
           value={selectedOptions.email}
           onChange={(e) => handleFilterChange("email", e.target.value)}
         >
@@ -101,11 +95,8 @@ const FilterHorizontalUser = ({ onChangeFilter }) => {
         <span className={styles.KeyData}>ORDER COUNTRY</span>
         <select
           name="country"
-          style={{
-            width: "160px",
-            borderBottom: "5px solid black",
-            borderInlineEnd: "2px solid black",
-          }}
+          className={styles.data}
+
           value={selectedOptions.country}
           onChange={(e) => handleFilterChange("country", e.target.value)}
         >
@@ -122,11 +113,7 @@ const FilterHorizontalUser = ({ onChangeFilter }) => {
         <span className={styles.KeyData}>ORDER STATUS</span>
         <select
           name="status"
-          style={{
-            width: "160px",
-            borderBottom: "5px solid black",
-            borderInlineEnd: "2px solid black",
-          }}
+          className={styles.data}
           value={selectedOptions.status}
           onChange={(e) => handleFilterChange("status", e.target.value)}
         >
@@ -135,6 +122,11 @@ const FilterHorizontalUser = ({ onChangeFilter }) => {
           <option value="inactive">Inactive</option>
           <option value="banned">Banned</option>
         </select>
+
+      </div>
+      
+      <div className={styles.searchBar}>
+        <button onClick={clearFilters}>Clear</button>
       </div>
 
       {/* <div className={styles.searchBar}>

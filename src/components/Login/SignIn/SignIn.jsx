@@ -118,12 +118,12 @@ const SignIn = ({ isActiveSignIn = false, onChangeSignIn }) => {
               <span onClick={() => { handlerSignIn('google') }} >
                 <SocialNetworks redSocial={{ google: '' }} />
               </span>
-              <span onClick={() => { handlerSignIn('twitter') }}>
+              {/* <span onClick={() => { handlerSignIn('twitter') }}>
                 <SocialNetworks redSocial={{ twitter: '' }} />
               </span>
               <div onClick={() => { handlerSignIn('facebook') }} >
                 <SocialNetworks redSocial={{ facebook: '' }} />
-              </div>
+              </div> */}
             </div>
           </div>
           <div className={styles.Links}>

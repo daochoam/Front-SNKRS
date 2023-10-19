@@ -21,6 +21,33 @@
   gap: 30px;
 }
 
+.searchBar{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchBar input{
+  font-size: 20px;
+  text-indent: 10px;
+  font-family: MontBold;
+  min-height: 40px;
+  max-height: 40px;
+  border-radius: 10px;
+  width: 180px;
+}
+
+.searchBar button{
+  margin-left: 10px;
+  min-height: 40px;
+  max-height: 40px;
+  font-family: MontBold;
+  border-radius: 10px;
+
+}
+
+
 .name {
   display: flex;
   justify-content: space-between;
@@ -240,4 +267,42 @@
 .circle img{
   width: 70px;
   height: 20px;
+}
+/* Estilo para el campo de búsqueda */
+.search_bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search_bar input {
+  width: 400px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+/* Estilo para el botón de búsqueda */
+.search_bar button {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  background-color: #007BFF;
+  color: #fff; 
+  
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  padding: 8px 8px;
+  cursor: pointer;
+}
+.search_bar button:hover{
+  background-color: #3e9bff;
+}
+/* Estilo para el ícono de lupa */
+.search_icon {
+  
+  font-size: 24px;
 }

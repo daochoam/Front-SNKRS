@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap";
 import DashBoard from '../../DashBoard.module.css'
 import styles from './Product.module.css';
 import InfoProduct from "./InfoProduct/InfoProduct";
 import StockProduct from "./StockProduct/StockProduct";
-import Logo from "../../../Icons/Logo";
 import { ICONS, MENU_ADMIN, NAVBAR_LINKS, NAV_ADMIN, PRODUCT_STORAGE } from "../../../../const";
-import ReviewProduct from "./ReviewProduct/ReviewProduct";
-import { handlerIsObjectEmpty } from "../../../../services";
+import ViewProduct from "./ViewProduct/ViewProduct";
+import hasEmptyFields from "./Components/hasEmptyFields";
+import { ConfirmCreateProduct, ErrorProduct, FieldsEmpty, NonDataStock, NonImageSelected, ProductSuccess } from "../../../Alerts";
+import { useSelector } from "react-redux";
+import getIdByName from "./Components/getIdByName";
+import { Navigate } from "react-router-dom";
+import axiosInstance from "../../../../utils/axiosInstance";
 
 const initProduct = {
   sku: '',
@@ -33,9 +36,16 @@ const Product = () => {
   const [product, setProduct] = useState(initProduct)
   const [save, setSave] = useState(false);
   const [steps, setSteps] = useState(1);
+  const [success, setSuccess] = useState(false)
   const { image, stock, ...infoProduct } = product
+  const brands = useSelector(({ filters }) => filters.detail.brands)
+  const types = useSelector(({ filters }) => filters.detail.types)
+  const categories = useSelector(({ filters }) => filters.detail.categories)
 
-  console.log("🚀 ~ file: Product.jsx:34 ~ Product ~ product:", product)
+
+  useEffect(() => {
+    localStorage.removeItem(PRODUCT_STORAGE)
+  }, [success])
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem(PRODUCT_STORAGE));
@@ -53,14 +63,46 @@ const Product = () => {
   const handlerNext = () => {
     if (steps === 1) {
       const { stock, image, sku, ...infoBasic } = product
-      if (handlerIsObjectEmpty(infoBasic)) {
-        return
+      if (hasEmptyFields(infoBasic)) {
+        return FieldsEmpty()
       }
-      setSteps(steps + 1)
+      if (hasEmptyFields(image)) {
+        return NonImageSelected()
+      }
+      return setSteps(steps + 1)
+    }
+    if (steps === 2) {
+      if (hasEmptyFields(stock)) {
+        return NonDataStock()
+      }
+      return setSteps(steps + 1)
     }
   }
 
-  const handlerSave = () => {
+  const handlerSave = async () => {
+    try {
+      const { image, sku, brand, category, type, ...infoProduct } = product
+      const ProductCreate = {
+        ...infoProduct,
+        Brand_id: getIdByName(brands, 'brand', brand),
+        Category_id: getIdByName(categories, 'category', category),
+        Type_id: getIdByName(types, 'type', type)
+      }
+      const formData = new FormData();
+
+      image.forEach(({ file, color }) => {
+        formData.append("imagesFiles", file, file.name);
+        formData.append("imagesColors", color);
+      })
+
+      const { _id } = await axiosInstance.post(`/products`, ProductCreate)
+      const data = await axiosInstance.put(`/products/images/${_id}`, formData)
+      ProductSuccess()
+      setSuccess(true)
+
+    } catch (error) {
+      ErrorProduct()
+    }
   }
 
   const handlerChangeProduct = (data) => {
@@ -69,6 +111,10 @@ const Product = () => {
     steps == 2 ? currentValue = { ...product, stock: [...data] } : null
     setProduct(currentValue)
     localStorage.setItem(PRODUCT_STORAGE, JSON.stringify(currentValue));
+  }
+
+  const onRedirect = (data) => {
+    setSuccess(data)
   }
 
   return (
@@ -101,13 +147,13 @@ const Product = () => {
             )}
             {steps === 3 && (
               <div className={styles.Info}>
-                <ReviewProduct />
+                <ViewProduct infoProduct={product} />
               </div>
             )}
           </div>
           <div className={`${styles.BtnProduct}`}>
             {steps > 1 && <button className={`${styles.ProductBtns}`} onClick={handlerPreview}>Prev</button>}
-            {save && steps > 1 && <button className={`${styles.ProductBtns}`} onClick={handlerSave}>Save</button>}
+            {steps == 3 && <button className={`${styles.ProductBtns}`} onClick={handlerSave}>Create</button>}
             {steps < 3 && <button className={`${styles.ProductBtns}`} onClick={handlerNext}>Next</button>}
           </div>
         </div>

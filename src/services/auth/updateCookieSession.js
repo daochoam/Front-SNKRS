@@ -6,10 +6,9 @@ import removeCookieSession from "./removeCookieSession";
 
 const updateCookieSession = async (nameCookie = SESSION_NAME) => {
     try {
-        const cookie = readCookieSession(nameCookie)
+        const cookie = readCookieSession()
         if (cookie) {
             const data = await axiosInstance.put(`/auth/session`)
-            removeCookieSession()
             setCookieSession(nameCookie, data)
         }
     } catch (error) {

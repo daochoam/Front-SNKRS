@@ -196,3 +196,31 @@ td {
     border-radius: 0 10px 10px 0;
 
 }
+
+.searchBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .searchBar input{
+    margin-top: 20px;
+    font-size: 20px;
+    text-indent: 10px;
+    font-family: MontBold;
+    min-height: 40px;
+    max-height: 40px;
+    border-radius: 10px;
+    width: 180px;
+  }
+  
+  .searchBar button{
+    margin-top: 20px;
+    margin-left: 10px;
+    min-height: 40px;
+    max-height: 40px;
+    font-family: MontBold;
+    border-radius: 10px;
+  
+  }

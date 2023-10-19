@@ -13,7 +13,7 @@ const Brands = () => {
     const brands = useSelector(({ filters }) => filters.detail.brands)
 
     useEffect(() => {
-        dispatch(fetchBrands('detail'))
+        dispatch(fetchBrands())
     }, [dispatch])
 
     const handlerAddBrand = () => {
@@ -21,7 +21,6 @@ const Brands = () => {
     }
 
     const handlerUpdateBrand = (id) => {
-        console.log(id)
     }
 
     const handlerDeleteBrand = (id) => {
@@ -73,11 +72,14 @@ const Brands = () => {
                                             PHONE  </div>
                                     </span>
                                 </th>
-                                <th> <button
+                                <th> 
+                                    {/* <button
                                     onClick={handlerAddBrand}
                                     onMouseEnter={() => handlerMouseEnter('add', null)}
                                     onMouseLeave={() => handlerMouseLeave('add', null)}
-                                ><h1>{ICONS.PLUS(isHovered.add ? '#4CAF50' : '#f4f4f4')}</h1></button></th>
+                                >
+                                    <h1>{ICONS.PLUS(isHovered.add ? '#4CAF50' : '#f4f4f4')}</h1></button> */}
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,13 +118,13 @@ const Brands = () => {
                                             </div>
                                         </td>
                                         <td>
-                                            <button
+                                            {/* <button
                                                 onClick={() => handlerUpdateBrand(brand?._id)}
                                                 onMouseEnter={() => handlerMouseEnter(index, 'edit')}
                                                 onMouseLeave={() => handlerMouseLeave(index, 'edit')}
                                             >
                                                 <h2>{ICONS.EDIT(isHovered[index]?.edit ? '#4CAF50' : '#454444')}</h2>
-                                            </button>
+                                            </button> */}
                                             <button
                                                 onClick={() => handlerDeleteBrand(brand?._id)}
                                                 onMouseEnter={() => handlerMouseEnter(index, 'trash')}

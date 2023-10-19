@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { postReview } from "../../redux/reviewSlice";
-import { BsEmojiFrown, BsEmojiNeutral, BsEmojiSmile } from 'react-icons/bs';
+import { BsEmojiFrown, BsEmojiNeutral, BsEmojiSmile } from "react-icons/bs";
 import { fetchUserById, selectUser } from "../../redux/user";
 import axios from "axios";
 import PropTypes from "prop-types";
@@ -17,7 +17,7 @@ const Reviews = ({ Product_id, brand, images, model }) => {
   const [zapatilla, setZapatilla] = useState(null);
   const user = useSelector(selectUser);
   console.log("Información del usuario:", user);
-
+  console.log(zapatilla);
   // Estados locales para la revisión
   const [rating, setRating] = useState(0);
   const [recommend, setRecommend] = useState(true);
@@ -26,9 +26,9 @@ const Reviews = ({ Product_id, brand, images, model }) => {
   const [aboutSize, setaboutSize] = useState("fine");
   const [serviceComment, setServiceComment] = useState("");
   const zapatillas = useSelector((state) => state.record.record);
-  const [selectedFace, setSelectedFace] = useState('according');
+  const [selectedFace, setSelectedFace] = useState("according");
   const [imageUrl, setImageUrl] = useState("");
-
+  console.log(zapatillas);
   const error = useSelector((state) => state.reviews.error);
   const handleFaceClick = (face) => {
     setSelectedFace(face);
@@ -55,11 +55,7 @@ const Reviews = ({ Product_id, brand, images, model }) => {
   };
 
   const handleSubmitReview = () => {
-    if (
-      rating === 0 ||
-      opinion.trim() === "" ||
-      serviceComment.trim() === ""
-    ) {
+    if (rating === 0 || opinion.trim() === "" || serviceComment.trim() === "") {
       // Validación de campos vacíos
       Swal.fire({
         icon: "error",
@@ -77,22 +73,21 @@ const Reviews = ({ Product_id, brand, images, model }) => {
       serviceComment,
       opinion,
       aboutSize,
-      Product_id:id,
+      Product_id: id,
     };
-    console.log(reviewData)
+    console.log(reviewData);
     // Llamar a la acción postReview para enviar el review al servidor
     dispatch(postReview(reviewData));
 
     // Muestra una alerta de éxito
-    if(error){
+    if (error) {
       Swal.fire({
         icon: "error",
         title: "Review sent",
         text: "The product already has a Review",
         confirmButtonColor: "red",
       });
-    }else{
-
+    } else {
       Swal.fire({
         icon: "success",
         title: "Review sent",
@@ -104,25 +99,23 @@ const Reviews = ({ Product_id, brand, images, model }) => {
           window.location.href = "/home";
         }
       });
-      
+
     }
   };
-useEffect(() => {
+  useEffect(() => {
+    if (!rating) {
+      (async () => {
+        const data = await axiosInstance.get(`/review/${id}`);
 
-
-  if(!rating){
-     (async () => {
-
-       const data = await axiosInstance.get(`/review/${id}`)
-
-       if(data){
-        console.log("adentro", data)
-        setReview(data)
-       }
-    })();
-  }
-}, [])
- console.log("Review=",review.review)
+        if (data) {
+          console.log("adentro", data);
+          setReview(data);
+        }
+      })();
+    }
+  }, []);
+  console.log("Review=", review.review);
+  
   useEffect(() => {
     dispatch(fetchUserById());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -131,13 +124,14 @@ useEffect(() => {
   useEffect(() => {
     const { image, ...userData } = user;
     setImageUrl(image);
-  }, [user])
+  }, [user]);
   useEffect(() => {
     // Realiza una solicitud HTTP para obtener los detalles de la zapatilla
     axios
-      .get(`http://localhost:3001/products/${id}`)
+      .get(`https://snkrs-29bl.onrender.com/products/${id}`)
       .then((response) => {
         setZapatilla(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error al obtener los datos de zapatilla:", error);
@@ -148,12 +142,19 @@ useEffect(() => {
     <div className="container">
       <div className="review-card">
         <div className="foto">
-        <h2>Write a Review</h2>
-        <div className="nombre">
+          <h2>Write a Review</h2>
+          <div className="nombre">
+            <img
+              className="userImage"
+              src={imageUrl}
+              alt="User Image"
+              width={70}
+            />
+            <p className="datos">
+              {user.firstName} {user.lastName}
+            </p>
 
-        <img className="userImage" src={imageUrl} alt="User Image" width={70}/>
-        <p className="datos">{user.firstName}{" "} {user.lastName}</p>
-        </div>
+          </div>
         </div>
         <div className="rating-section">
           <p className="ove">Overall rating</p>
@@ -248,23 +249,18 @@ useEffect(() => {
         <button className="boton" onClick={handleSubmitReview}>
           Submit Review
         </button>
-        
       </div>
       <div className="producto">
-        
-         
-            <div className="zapa" key={zapatilla?._id}>
-              <img src={zapatilla?.image?.[0]?.src} alt="" />
-              <div className="data">
-              <h1 className="name">{zapatilla?.brand?.brand}</h1>
-             <h2>{zapatilla?.model}</h2>
-              <strong className="type">{zapatilla?.type}</strong>
-              <p className="price">$ {zapatilla?.price}</p>
 
-              </div>
-            </div>
-        
-       
+        <div className="zapa" key={zapatilla?._id}>
+          <img src={zapatilla?.image?.[0]?.src} alt="" />
+          <div className="data">
+            <h1 className="name">{zapatilla?.brand?.brand}</h1>
+            <h2>{zapatilla?.model}</h2>
+            <strong className="type">{zapatilla?.type}</strong>
+            <p className="price">$ {zapatilla?.price}</p>
+          </div>
+        </div>
 
         <div className="in">
           <h3>Write the perfect review</h3>
@@ -279,7 +275,7 @@ useEffect(() => {
           </p>
         </div>
         <div>
-      {/* <h2>Select your satisfaction status:</h2>
+          {/* <h2>Select your satisfaction status:</h2>
       <div className="selector">
         <div
           className={`cara ${selectedFace === 'very_dissatisfied' ? 'selected' : ''}`}
@@ -301,24 +297,51 @@ useEffect(() => {
         </div>
       </div>
       <p>Selection: {selectedFace}</p> */}
-      <h2>Tu calificación anterior</h2>
-      <p>Rating:{review?.review?.rating}</p>
-      <p>Recomend:{review?.review?.recommend ? "yes" : "no"}</p>
-      <p>About size: {review?.review?.aboutSize}</p>
-      <p>Opinion: {review?.review?.opinion}</p>
-      <p>Service comment: {review?.review?.serviceComment}</p>
-    </div>
+          <div className="rating-card">
+            <h2 className="card-title">Tu calificación anterior</h2>
+            <div className="rating-details">
+              <strong className="rating-info">
+                Rating:
+              </strong>
+              <p>
+              {Array.from({ length: review?.review?.rating }, (_, index) => (
+                  <span key={index} className="star-filled">
+                    &#9733;
+                  </span>
+                ))}
+                {Array.from(
+                  { length: 5 - (review?.review?.rating || 0) },
+                  (_, index) => (
+                    <span key={index} className="star-outline">
+                      &#9733;
+                    </span>
+                  )
+                )}
+              </p>
+              <strong className="rating-info">
+                Recomendado: {" "} <span>{review?.review?.recommend ? "Sí" : "No"}</span> 
+              </strong>
+              <strong className="rating-info">
+                Acerca del tamaño: {" "} <span>{review?.review?.aboutSize}</span> 
+              </strong>
+              <strong className="rating-info">Opinión: {" "} <span>{review?.review?.opinion}</span></strong>
+              <strong className="rating-info">
+                Comentario de servicio: {" "} <span>{review?.review?.serviceComment}</span>
+              </strong>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 Reviews.propTypes = {
-  Product_id: PropTypes.string.isRequired,
-  brand: PropTypes.string.isRequired,
+  Product_id: PropTypes.string,
+  brand: PropTypes.string,
   images: PropTypes.arrayOf(
-    PropTypes.shape({ src: PropTypes.string.isRequired })
+    PropTypes.shape({ src: PropTypes.string })
   ),
-  model: PropTypes.string.isRequired,
+  model: PropTypes.string,
 };
 
 export default Reviews;

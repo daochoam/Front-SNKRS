@@ -97,21 +97,16 @@
   height: 780px;
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-content: center;
-  width: 1000px;
-  text-decoration: none;
-
-}
-
 .data {
+ 
   font-family: MontHeavy;
   text-decoration: none;
   color: #000;
 }
-
+.colores{
+  display: flex;
+  justify-content: space-between;
+}
 .letra {
   font-family: MontLight;
   text-decoration: none;
@@ -157,12 +152,18 @@
   position: relative;
 }
 
-.card img {
+.cardImage {
+  max-width: 100%;
+  min-height: 300px !important;
+  height: auto;
+}
+
+.cardLogo {
   max-width: 100%;
   height: auto;
 }
 
-.outStock{
+.outStock {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -171,16 +172,16 @@
   height: 400px;
 }
 
-.outStock h3{
+.outStock h3 {
   font-family: MontHeavy;
   font-size: 90px;
 }
 
-.outStock h2{
+.outStock h2 {
   font-family: MontBold;
 }
 
-.outStock h4{
+.outStock h4 {
   font-family: MontHeavy;
   font-size: 20px;
 }
@@ -226,14 +227,12 @@
   display: grid;
   flex-direction: row;
   gap: 3px;
-  width: 100px;
-  height: 20px;
+  width: 240px;
+  height: auto;
   justify-content: center;
   align-items: start;
   align-content: stretch;
   grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
-
-
 }
 
 .ColorsCard h5 {

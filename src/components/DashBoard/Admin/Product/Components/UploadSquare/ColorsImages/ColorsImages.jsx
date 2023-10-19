@@ -76,7 +76,7 @@ const ColorsImages = ({ initColor = '', colors = [], inChangeColor = false, onSe
 
 ColorsImages.propTypes = {
   initColor: PropTypes.string,
-  inChangeColor: PropTypes.boolean,
+  inChangeColor: PropTypes.bool,
   onSelectColor: PropTypes.func,
   colors: PropTypes.array
 }

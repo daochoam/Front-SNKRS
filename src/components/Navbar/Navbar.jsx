@@ -53,7 +53,7 @@ const Navbar = ({ NavColor = '#ffffff', LogoColor = 'black' }) => {
         };
     }, [dispatch]);
 
-    const handlerChangeFavorite = () => {
+    const handlerNotAllowed = () => {
         if (!cookie) {
             return NotLogin()
         }
@@ -75,13 +75,13 @@ const Navbar = ({ NavColor = '#ffffff', LogoColor = 'black' }) => {
                     {role != 'admin' ? FAVORITE.includes(pathname) || DETAIL_PAGE(pathname) ?
 
                         <Link to={role == 'user' ? MENU_USER.favorites.route || DETAIL_PAGE(pathname) : null}>
-                            <h3 title='favorites' onClick={handlerChangeFavorite}>{ICONS.FAVORITE('black')}</h3></Link> :
+                            <h3 title='favorites' onClick={handlerNotAllowed}>{ICONS.FAVORITE('black')}</h3></Link> :
                         null : null}
                     {/* //? TROLLEY */}
                     {(role != 'admin' && (TROLLEY.includes(pathname) || DETAIL_PAGE(pathname))) ?
                         <h3>
-                            <Link to={role == "user" ? MENU_USER.shopping.route : "/trolley"}>
-                                <h3 title='shopping cart'>
+                            <Link to={role == 'user' ? MENU_USER.shopping.route || DETAIL_PAGE(pathname) : null}>
+                                <h3 title='shopping cart' onClick={handlerNotAllowed}>
                                     {ICONS.TROLLEY("black")}
                                     {cartItems.length > 0 && <span className={styles.cartCounter}> {cartItems.length} </span>}
                                 </h3>
