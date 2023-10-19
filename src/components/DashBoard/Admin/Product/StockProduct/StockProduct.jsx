@@ -10,22 +10,42 @@ import { fetchColors, fetchSizes } from '../../../../../redux/filters';
 import Sizes from '../Components/Filters/Sizes/Sizes';
 import handlerFilterStock from './handlerFilterStock';
 import { ICONS } from '../../../../../const';
+import handlerStockGteZero from './handlerStockGteZero';
 
 const initInfoStock = []
 
-const StockProduct = ({ initStock, onChangeStockProduct, errors, model = '', gender = '' }) => {
+const StockProduct = ({ initStock = [], onChangeStockProduct, errors, model = '', gender = '' }) => {
     const dispatch = useDispatch()
     const [isHovered, setIsHovered] = useState({ 0: { minus: false, plus: false } })
     const [filtered, setFiltered] = useState([])
     const [stock, setStock] = useState(initInfoStock)
-    console.log("🚀 ~ file: StockProduct.jsx:21 ~ StockProduct ~ stock:", stock)
-    const [filter, setFilter] = useState({ color: '', size: '' })
+    const [filter, setFilter] = useState({ color: [], size: [] })
     const colors = useSelector(({ filters }) => filters.data.colors)
     const sizes = useSelector(({ filters }) => filters.data.sizes)
 
     useEffect(() => {
-        setStock(initStock)
-    }, [initStock, errors])
+        setStock(handlerFieldStock(colors, sizes))
+    }, [colors, sizes])
+
+    useEffect(() => {
+        let stockValues
+        if (!stock.length) stockValues = handlerFieldStock(colors, sizes)
+        else stockValues = [...stock]
+
+        if (initStock.length) {
+            initStock.forEach((initValue) => {
+                const matchItem = stockValues.find(({ size, color }) => {
+                    return (
+                        size === initValue.size &&
+                        color.name === initValue.color.name)
+                });
+                if (matchItem) {
+                    matchItem.quantity = initValue.quantity;
+                }
+            });
+            setStock(stockValues);
+        }
+    }, [initStock, stock, colors, sizes])
 
     useEffect(() => {
         dispatch(fetchColors())
@@ -33,49 +53,52 @@ const StockProduct = ({ initStock, onChangeStockProduct, errors, model = '', gen
     }, [dispatch, gender])
 
     useEffect(() => {
-        setStock(handlerFieldStock(colors, sizes))
-    }, [dispatch, colors, sizes])
-
-    useEffect(() => {
         setFiltered(handlerFilterStock(filter, stock))
     }, [filter, stock])
 
 
     const handlerChangeColor = (data) => {
-        if (data === filter.color) {
-            setFilter({ ...filter, color: '' })
+        if (filter.color.includes(data)) {
+            setFilter({ ...filter, color: filter.color.filter(color => color !== data) });
         } else {
-            setFilter({ ...filter, color: data })
+            const currentColor = { ...filter }
+            currentColor.color = data
+            setFilter(currentColor);
         }
     }
 
     const handlerChangeSize = (data) => {
-        if (data === filter.size) {
-            setFilter({ ...filter, size: '' })
+        if (filter.size.includes(data)) {
+            setFilter({ ...filter, size: filter.size.filter(size => size !== data) });
         } else {
-            setFilter({ ...filter, size: data })
+            const currentFilter = { ...filter }
+            currentFilter.size = data
+            setFilter(currentFilter);
         }
     }
+
     const handlerChangeQuantity = (event, index) => {
         event.preventDefault();
-        let updateData = [...stock]
+        let updateStock = [...stock]
         const { name, value } = event.target;
-        updateData[index].quantity = Math.abs(value)
-        return setStock(updateData)
+        updateStock[index].quantity = Math.abs(value)
+        setStock(updateStock)
+        onChangeStockProduct(handlerStockGteZero(updateStock))
     }
 
+
+
     const handlerClickQuantity = (event, index, button) => {
-        event.preventDefault()
-        let updateData = [...stock]
-        if (button === 'minus' && updateData[index].quantity > 0) {
-            updateData[index].quantity -= 1
-            return setStock(updateData)
+        event.preventDefault();
+        let updateStock = [...stock]
+        if (button === 'minus' && updateStock[index].quantity > 0) {
+            updateStock[index].quantity -= 1
         }
         if (button === 'plus') {
-            updateData[index].quantity += 1
-            return setStock(updateData)
-
+            updateStock[index].quantity += 1
         }
+        setStock(updateStock)
+        onChangeStockProduct(handlerStockGteZero(updateStock))
     }
 
     const handlerHoverEnter = (index, button) => {
@@ -87,10 +110,8 @@ const StockProduct = ({ initStock, onChangeStockProduct, errors, model = '', gen
     return (
         <div className={styles.StockContainer}>
             <div className={styles.ContainerHeader}>
-                <div className={styles.ProductModel}>
-                    <Label title='MODEL' text={model.toUpperCase()} />
-                </div>
                 <div className={styles.ProductFilters}>
+                    <Label title='MODEL' text={model.toUpperCase()} />
                     <Label title='GENDER' text={gender.toUpperCase()} />
                     <Colors colors={colors} onSelectColor={handlerChangeColor} />
                     <Sizes sizes={sizes} onSelectSize={handlerChangeSize} />
@@ -106,18 +127,18 @@ const StockProduct = ({ initStock, onChangeStockProduct, errors, model = '', gen
                                 <div className={styles.ColorStock} style={{ background: `${color?.html}` }} title={color?.name}>
                                 </div>
                                 <div className={styles.QuantityStock}>
-                                    <h4 onMouseEnter={() => handlerHoverEnter(index, "minus")}
+                                    <h3 onMouseEnter={() => handlerHoverEnter(index, "minus")}
                                         onMouseLeave={() => handlerHoverLeave(index, "minus")}
-                                        onClick={() => handlerClickQuantity(index, "minus")}>
-                                        {ICONS.MINUS(!isHovered[index]?.minus ? '#828282' : 'green')}</h4>
+                                        onClick={(event) => handlerClickQuantity(event, index, "minus")}>
+                                        {ICONS.MINUS_SQUARE(!isHovered[index]?.minus ? '#828282' : 'green')}</h3>
                                     <input type='text' name={index} value={quantity}
                                         className={styles.InputQuantity}
                                         onChange={(event) => handlerChangeQuantity(event, index)}
                                     />
-                                    <h4 onMouseEnter={() => handlerHoverEnter(index, "plus")}
+                                    <h3 onMouseEnter={() => handlerHoverEnter(index, "plus")}
                                         onMouseLeave={() => handlerHoverLeave(index, "plus")}
                                         onClick={(event) => handlerClickQuantity(event, index, "plus")}>
-                                        {ICONS.PLUS(!isHovered[index]?.plus ? '#828282' : 'green')}</h4>
+                                        {ICONS.PLUS_SQUARE(!isHovered[index]?.plus ? '#828282' : 'green')}</h3>
                                 </div>
                             </div>
                         )

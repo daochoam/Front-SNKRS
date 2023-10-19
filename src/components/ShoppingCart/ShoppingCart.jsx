@@ -171,7 +171,11 @@ const ShoppingCart = () => {
           </div>
         ) : (
           <div className={styles.cartEmpty}>
-            <p>YOUR CART IS EMPTY</p>
+            <h1>Your cart is empty</h1>
+           
+            <Link to="/home">
+            <button className={styles.shopping}>Go shopping</button>
+            </Link>
           </div>
         )}
 
@@ -191,7 +195,7 @@ const ShoppingCart = () => {
                 </table>
                 <Link to="/checkout">
                   <button className={styles.pay}>
-                    PAGAR
+                    Go to checkout
                   </button>
                 </Link>
               </div>

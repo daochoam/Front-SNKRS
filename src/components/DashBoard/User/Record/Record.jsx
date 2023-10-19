@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -7,10 +5,8 @@ import DashBoard from "../../DashBoard.module.css";
 import styles from "./Record.module.css";
 import { fetchRecord } from "../../../../redux/recordSlice";
 import { Link } from "react-router-dom";
-import { setSortingMethod} from "../../../../redux/recordSlice";
+import { setSortingMethod } from "../../../../redux/recordSlice";
 import { ICONS } from "../../../../const";
-
-
 const Record = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -34,12 +30,7 @@ const Record = () => {
     return state.record.record;
   });
 
-
-  
-
-
-
-  console.log(record);
+  console.log(record)
   useEffect(() => {
     dispatch(fetchRecord());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,7 +39,7 @@ const Record = () => {
     const selectedSorting = e.target.value;
     setSorting(selectedSorting);
     dispatch(setSortingMethod(selectedSorting));
-    
+
   };
   const getPaginatedRecord = () => {
     const itemsPerPage = 3;
@@ -120,7 +111,7 @@ const Record = () => {
                           <Link
                             to={`/reviews/${product.Product_id}`}
                             className={styles.reviewButton}
-                           
+
                           >
                             Review
                           </Link>

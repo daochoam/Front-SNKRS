@@ -1,31 +1,39 @@
 import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types';
-import styles from './Colors.module.css'
+import styles from './ColorsImages.module.css'
 import { ICONS } from '../../../../../../../const';
 
-const Colors = ({ initColor = '', colors = [], onSelectColor }) => {
+const ColorsImages = ({ initColor = '', colors = [], inChangeColor = false, onSelectColor }) => {
   const [hover, setHover] = useState(false)
-  const [color, setColor] = useState([])
+  const [color, setColor] = useState(null)
   const [viewColors, setViewColors] = useState(false)
+  const [options, setOptions] = useState([])
 
+  useEffect(() => {
+    setOptions(colors)
+  }, [colors])
+
+  useEffect(() => {
+    setColor(null)
+  }, [inChangeColor])
 
   const handlerSelectColor = (data) => {
-    let currentColors = [...color];
-    if (currentColors.includes(data)) {
-      currentColors = currentColors.filter(selectedColor => selectedColor !== data);
-    } else {
-      currentColors.push(data);
-    }
-    setColor(currentColors);
-    onSelectColor(currentColors);
-  };
-
+    let currentData = ''
+    data == color ? currentData = '' : currentData = data
+    setColor(currentData)
+    onSelectColor(currentData)
+    setViewColors(false)
+  }
   const handlerViewColors = () => {
     setViewColors(!viewColors)
   }
 
   const handlerHoverEnter = () => { setHover(!hover) }
   const handlerHoverLeave = () => { setHover(!hover) }
+
+  let dataColor = {}
+  if (color != '') dataColor = options?.find(({ name }) => color === name)
+
 
   return (
     <div className={styles.ColorsContainer} >
@@ -47,12 +55,12 @@ const Colors = ({ initColor = '', colors = [], onSelectColor }) => {
       </span>
       <div className={viewColors ? styles.PaletteColors : null} >
         {viewColors && (
-          colors?.map(({ name, html }, index) => {
+          options?.map(({ name, html }, index) => {
             return (
               <div className={styles.MarkColor} key={index}>
                 <button
                   title={name}
-                  className={color.includes(name) ? styles.BtnColorActive : styles.BtnColor}
+                  className={color !== name ? styles.BtnColor : styles.BtnColorActive}
                   style={{ background: `${html}` }}
                   onClick={() => handlerSelectColor(name)}
                 />
@@ -65,10 +73,12 @@ const Colors = ({ initColor = '', colors = [], onSelectColor }) => {
   )
 }
 
-Colors.propTypes = {
+
+ColorsImages.propTypes = {
   initColor: PropTypes.string,
+  inChangeColor: PropTypes.boolean,
   onSelectColor: PropTypes.func,
   colors: PropTypes.array
 }
 
-export default Colors
+export default ColorsImages

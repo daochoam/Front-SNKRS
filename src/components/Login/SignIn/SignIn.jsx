@@ -140,7 +140,7 @@ const SignIn = ({ isActiveSignIn = false, onChangeSignIn }) => {
 
 SignIn.propTypes = {
   isActiveSignIn: PropTypes.bool.isRequired,
-  onChangeSignIn: PropTypes.bool,
+  onChangeSignIn: PropTypes.func,
 };
 
 export default SignIn;

@@ -14,11 +14,12 @@
 .StepsView {
     display: flex;
     flex-direction: row;
-    height: 50px;
+    height: 97px;
     width: 100%;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
+    align-content: center;
 }
 
 .StepsViewBody {
@@ -78,28 +79,13 @@
     margin-left: 5%;
 }
 
-.HeaderProduct h2 {
+.HeaderProduct h1 {
     color: #424242;
+    gap: 15px;
     margin: 0;
 }
 
-.DataProduct {
-    background-color: #F1F1F1;
-    border-radius: 30px;
-    width: 100%;
-    height: calc(100vh - 230px);
-    border-bottom: #424242 8px solid;
-    color: #424242;
-}
 
-.LogoProduct {
-    display: flex;
-    transform: scaleY(-1);
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    flex-wrap: wrap;
-}
 
 .StepsContainer {
     width: 100%;
@@ -109,11 +95,12 @@
 
 .BtnProduct {
     width: 100%;
-    height: 50px;
+    height: 100px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
     flex-direction: row;
+    gap: 20px;
 }
 
 .BtnProduct .ProductBtns {

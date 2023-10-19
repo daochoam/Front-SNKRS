@@ -12,7 +12,7 @@ import {
     FaArrowAltCircleDown,
     FaArrowAltCircleUp,
     FaPencilAlt,
-    FaCircle
+    FaCircle,
 } from 'react-icons/fa';
 import {
     MdMale,
@@ -21,20 +21,16 @@ import {
     MdEmail,
     MdOutlineEmail,
     MdPerson,
-    MdOutlineLocationOn
 } from 'react-icons/md';
 import {
     BsTelephone,
-    BsTelephoneFill,
-    BsFillBuildingFill,
     BsBuilding,
     BsSuitHeartFill,
     BsSuitHeart,
     BsPersonVcard,
-    BsPersonVcardFill,
     BsImage
 } from 'react-icons/bs'
-import { BiMapPin, BiSolidMapPin } from 'react-icons/bi'
+import { BiMapPin, BiSolidMinusSquare, BiSolidPlusSquare } from 'react-icons/bi'
 import { IoEarthOutline } from 'react-icons/io5'
 import { LiaCitySolid } from 'react-icons/lia'
 import { RiArrowLeftDoubleFill } from 'react-icons/ri'
@@ -71,5 +67,8 @@ export const ICONS = {
     ARROW_DOWN: (fill = 'black') => { return <FaArrowAltCircleDown fill={fill} /> },
     ARROW_UP: (fill = 'black') => { return <FaArrowAltCircleUp fill={fill} /> },
     EDIT: (fill = 'black') => { return <FaPencilAlt fill={fill} /> },
-    COLORS: (fill = 'white') => { return <FaCircle fill={fill} /> }
+    COLORS: (fill = 'white') => { return <FaCircle fill={fill} /> },
+    PLUS_SQUARE: (fill = 'black') => { return <BiSolidPlusSquare fill={fill} /> },
+    MINUS_SQUARE: (fill = 'black') => { return <BiSolidMinusSquare fill={fill} /> },
+
 }

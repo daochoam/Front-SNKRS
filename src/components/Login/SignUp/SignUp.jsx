@@ -42,6 +42,7 @@ const SignUp = () => {
       setSignUp({ ...signUp, ...storedData.signUp });
       setError({ ...error, ...storedData.error })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handlerChangeImage = () => {

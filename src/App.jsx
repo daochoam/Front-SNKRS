@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './views/Home/Home'
 import LateralMenu from './components/DashBoard/LateralMenu/LateralMenu';
-import { Brands, Customer, Product, Sales, Statistics, Stock, TypesCategories } from './views/Admin'
+import { Brands, Customer, Product, Sales, Stock, TypesCategories } from './views/Admin'
 import { Favorites, Profile, Record, Shopping } from './views/User'
 import HomeViews from './views/HomeViews/HomeViews';
 import Payment from './views/Payment/Payment';
@@ -33,9 +33,9 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/home" element={
-          <ProtectedRoutes>
+    
             <HomeViews />
-          </ProtectedRoutes>
+      
         }
         />
         {/* <Route path="/user" element={<User />} /> */}
@@ -59,8 +59,8 @@ function App() {
         <Route exact path="/user/record" element={<Record />} />
 
         {/* //?Routes ADMIN */}
-        <Route path="/admin" element={<Navigate to="/admin/statistics" />} />
-        <Route exact path="/admin/statistics" element={<Statistics />} />
+        <Route path="/admin" element={<Navigate to="/admin/sales" />} />
+        {/* <Route exact path="/admin/statistics" element={<Statistics />} /> */}
         <Route exact path="/admin/sales" element={<Sales />} />
         <Route exact path="/admin/customer" element={<Customer />} />
         <Route exact path="/admin/product" element={<Product />} />

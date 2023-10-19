@@ -1,3 +1,6 @@
+// export const URL_SNKRS_FRONT = 'http://localhost:5173'
+export const URL_SNKRS_FRONT = 'https://snkrs-front.vercel.app/'
+
 // export const URL_SNKRS = 'http://localhost:3001'
 export const URL_SNKRS = 'https://snkrs-29bl.onrender.com'
 

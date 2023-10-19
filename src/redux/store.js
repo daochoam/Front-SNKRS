@@ -11,6 +11,7 @@ import authReducer from './auth';
 import userReducer from './user';
 import reviewReducer from './reviewSlice';
 import newsletterReducer from "./newsletterSlice";
+import salesReducer from "./salesSlice"
 const store = configureStore({
   reducer: {
     favorites: favoritesReducer,
@@ -22,6 +23,7 @@ const store = configureStore({
     results: resultsMenReducer,
     record: recordReducer,
     country: countryReducer,
+    sales : salesReducer,
 
  
     reviews: reviewReducer,

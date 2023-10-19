@@ -35,11 +35,11 @@ export const MENU_USER = {
 }
 
 export const MENU_ADMIN = {
-    statistics: {
-        name: 'STATISTICS',
-        route: '/admin/statistics',
-        icon: <FaChartPie />,
-    },
+    // statistics: {
+    //     name: 'STATISTICS',
+    //     route: '/admin/statistics',
+    //     icon: <FaChartPie />,
+    // },
     sales: {
         name: 'SALES',
         route: '/admin/sales',

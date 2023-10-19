@@ -16,7 +16,7 @@ export const NAVBAR_LINKS = {
         '/user/favorites',
         '/user/record',
         '/user/shopping',
-        '/admin/statistics',
+        // '/admin/statistics',
         '/admin/sales',
         '/admin/customer',
         '/admin/stock',

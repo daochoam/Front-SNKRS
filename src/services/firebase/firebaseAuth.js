@@ -1,4 +1,5 @@
 import { URL_SNKRS } from '../../const';
+import { URL_SNKRS_FRONT } from '../../const/const';
 import { firebase } from './firebaseConfig';
 import {
     getAuth,
@@ -56,7 +57,7 @@ const signInWithTwitter = () => {
 
 const resetPassword = async (email) => {
     await sendPasswordReset(auth, email, {
-        url: `${URL_SNKRS}/`,
+        url: `${URL_SNKRS_FRONT}/`,
         handleCodeInApp: true
     })
 };

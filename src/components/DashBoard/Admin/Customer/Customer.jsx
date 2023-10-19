@@ -30,52 +30,7 @@ const Customer = () => {
         console.log("es data", data);
       };
 
-    const handlerAddBrand = () => {
-        Swal.fire({
-            title: 'Crear Nuevo Usuario',
-            html: `
-                <form id="userForm">
-                    <input type="text" id="firstName" placeholder="First Name" required />
-                    <input type="text" id="lastName" placeholder="Last Name" required />
-                    <input type="email" id="email" placeholder="Email" required />
-                    <input type="password" id="password" placeholder="Password" required />
-                    <select id="status">
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                        <option value="banned">Banned</option>
-                    </select>
-                    <button type="submit">Submit</button>
-                </form>
-            `,
-            showCancelButton: true,
-            showConfirmButton: false,
-            cancelButtonText: 'Cerrar',
-            didOpen: () => {
-                const userForm = document.getElementById('userForm');
-                userForm.addEventListener('submit', async (event) => {
-                    event.preventDefault();
-                    const formData = new FormData(userForm);
-                    const newUser = {};
-                    for (let pair of formData.entries()) {
-                        newUser[pair[0]] = pair[1];
-                    }
-                    console.log('Nuevo usuario:', newUser);
-    
-                    try {
-                        const response = await axiosInstance.post('/auth/sign-up', {
-                            ...newUser,
-                        });
-                        console.log('Respuesta de creación de usuario:', response.data);
-                        // Aquí puedes manejar la lógica después de crear el nuevo usuario
-                    } catch (error) {
-                        console.error('Error al crear el usuario:', error);
-                        // Aquí puedes manejar los errores de la solicitud de creación de usuario
-                    }
-                });
-            }
-        });
-    };
-    
+    // 
 
     const handlerUpdateBrand = (id) => {
         MySwal.fire({
@@ -96,7 +51,7 @@ const Customer = () => {
                 axiosInstance.put(`admin/user/${id}`, { status: selectValue })
                     .then(response => {
                         console.log('Respuesta de actualización:', response.data);
-                        dispatch(fetchAllUser());
+                        dispatch(fetchAllUser({...filter}))
                         Swal.fire({
                             title: 'successful edit!',
                             icon: 'success',
@@ -172,10 +127,10 @@ const Customer = () => {
                                     </span>
                                 </th>
                                 <th> <button
-                                    onClick={handlerAddBrand}
+                                    // onClick={handlerAddBrand}
                                     onMouseEnter={() => handlerMouseEnter('add', null)}
                                     onMouseLeave={() => handlerMouseLeave('add', null)}
-                                ><h1>{ICONS.PLUS(isHovered.add ? '#4CAF50' : '#f4f4f4')}</h1></button></th>
+                                ><h1>{ICONS.PLUS}</h1></button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -246,3 +201,53 @@ const Customer = () => {
 Customer.propTypes = {}
 
 export default Customer
+
+
+
+
+// const handlerAddBrand = () => {
+    //     Swal.fire({
+    //         title: 'Crear Nuevo Usuario',
+    //         html: `
+    //             <form id="userForm">
+    //                 <input type="text" id="firstName" placeholder="First Name" required />
+    //                 <input type="text" id="lastName" placeholder="Last Name" required />
+    //                 <input type="email" id="email" placeholder="Email" required />
+    //                 <input type="password" id="password" placeholder="Password" required />
+    //                 <select id="status">
+    //                     <option value="active">Active</option>
+    //                     <option value="inactive">Inactive</option>
+    //                     <option value="banned">Banned</option>
+    //                 </select>
+    //                 <button type="submit">Submit</button>
+    //             </form>
+    //         `,
+    //         showCancelButton: true,
+    //         showConfirmButton: false,
+    //         cancelButtonText: 'Cerrar',
+    //         didOpen: () => {
+    //             const userForm = document.getElementById('userForm');
+    //             userForm.addEventListener('submit', async (event) => {
+    //                 event.preventDefault();
+    //                 const formData = new FormData(userForm);
+    //                 const newUser = {};
+    //                 for (let pair of formData.entries()) {
+    //                     newUser[pair[0]] = pair[1];
+    //                 }
+    //                 console.log('Nuevo usuario:', newUser);
+    
+    //                 try {
+    //                     const response = await axiosInstance.post('/auth/sign-up', {
+    //                         ...newUser,
+    //                     });
+    //                     console.log('Respuesta de creación de usuario:', response.data);
+    //                     // Aquí puedes manejar la lógica después de crear el nuevo usuario
+    //                 } catch (error) {
+    //                     console.error('Error al crear el usuario:', error);
+    //                     // Aquí puedes manejar los errores de la solicitud de creación de usuario
+    //                 }
+    //             });
+    //         }
+    //     });
+    // };
+    

@@ -41,7 +41,6 @@ const CheckOut_V1 = () => {
     state: "",
     city: "",
   });
-  console.log("formData", formData);
 
   const [formErrors, setFormErrors] = useState({
     firstName: "error",
@@ -116,10 +115,8 @@ const CheckOut_V1 = () => {
           phone: formData.phone,
         },
       };
-      console.log(postData);
       const response = await axiosInstance.post("/shopping", postData);
       setToken(response.id);
-      console.log("Respuesta del servidor:", response);
     } catch (error) {
       console.error("Error al realizar la solicitud POST:", error);
     }

@@ -1,27 +1,110 @@
+/*                         */
+
 .InfoProductContainer {
     position: relative;
 }
 
-.DataInfo {
-    width: 75%;
-    position: relative;
+.ProductBody {
+    font-family: MontHeavy;
+    margin-top: 20px;
     display: flex;
-    gap: 12px;
     flex-direction: column;
+    width: 100%;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+
+
+.InfoContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Dos columnas de igual ancho */
+    grid-template-rows: auto;
+    /* Altura automática */
+    width: 100%;
+}
+
+.DataBasic {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
     align-items: flex-start;
-    padding-top: 10px;
-    margin: auto;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 25px;
+    align-content: center;
+}
+
+
+.DataInfo {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 25px;
 }
 
 .DataInfo h3 {
     padding-right: 40px;
 }
 
-.Info {
+.HeaderLogo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-content: center;
+}
+
+.LogoProduct {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.HeaderProduct {
+    width: 580px;
+    margin: 0 auto;
+    display: flex;
+    color: #424242;
+    gap: 25px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    border-bottom: 3px dashed #424242;
+}
+
+.HeaderProduct h1 {
+    font-size: 50px;
+}
+
+
+.DataProduct {
+    display: flex;
     width: 100%;
     height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 30px;
+}
+
+
+
+.Information {
+    width: 100%;
 }
 
 .DataInputsProducts {
@@ -34,10 +117,34 @@
     align-content: center;
 }
 
+
+
+
+
+.Info {
+    width: 100%;
+    height: auto;
+}
+
+
 .KeyData {
     width: 180px;
     font-size: 30px;
 }
+
+
+.DataImages {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 25px;
+    padding: 50px;
+}
+
 
 .Images {
     width: 100%;
@@ -46,7 +153,6 @@
     margin-bottom: 10px;
     gap: 20px;
 }
-
 
 .UploadImages {
     width: 100%;

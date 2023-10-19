@@ -94,7 +94,17 @@
   font-family: MontHeavy;
   animation: pulse 1s infinite;
 }
-
+.shopping{
+  cursor: pointer;
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-family: MontHeavy;
+  animation: pulse 1s infinite;
+}
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -134,7 +144,6 @@
   font-family: MontHeavy;
   font-size: 50px;
   display: flex;
-  justify-content: flex-start;
   padding-left: 200px;
 }
 
@@ -149,12 +158,15 @@
 }
 
 .cartEmpty {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  margin-left: 218px;
-  width: 1150px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 218px;
+    width: 1150px;
+    align-content: space-around;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    flex-direction: column;
 
 }
 
