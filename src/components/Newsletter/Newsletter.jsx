@@ -14,28 +14,7 @@ const Newsletter = () => {
   const handleSubscribe = () => {
     if (email) {
       dispatch(subscribeToNewsletter(email))
-        .unwrap()
-        .then((data) => {
-          // La suscripción se realizó con éxito
-          console.log("Suscripción exitosa", data);
-          setEmail("");
-          // Muestra una alerta de éxito con SweetAlert2
-          Swal.fire({
-            icon: "success",
-            title: "Subscription Successful",
-            text: "Thank you for subscribing to our newsletter!",
-          });
-        })
-        .catch((error) => {
-          // Error al suscribirse
-          setErrorMessage(error.message);
-          // Muestra una alerta de error con SweetAlert2
-          Swal.fire({
-            icon: "error",
-            title: "Subscription Error",
-            text: "There was an error while subscribing. Please try again later.",
-          });
-        });
+
     }
   };
 
@@ -56,10 +35,12 @@ const Newsletter = () => {
             SEND
           </button>
         </div>
-        {subscriptionStatus === "failed" && <p>Error: {errorMessage}</p>}
+        {/* {subscriptionStatus === "failed" && <p>Error: {errorMessage}</p>} */}
       </div>
     </div>
   );
 }
 
 export default Newsletter;
+
+

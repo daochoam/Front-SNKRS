@@ -16,14 +16,15 @@ export const userSlice = createSlice({
         },
         setAllUsers: (state, action) => {
             state.users = action.payload
-        }
-    },
+        },
     updateUserData: (state, action) => {
         if (state.user) {
+        console.log("🚀 ~ file: user.js:23 ~ action.payload:", action.payload)
           state.user = { ...state.user, ...action.payload };
         }
-      },
+    }}
 });
+
 
 export const selectUser = (state) => state.user.user;
 
@@ -47,14 +48,27 @@ export const updateUser = (updatedData) => async (dispatch) => {
     }
 };
 
-export const fetchAllUser = () => async (dispatch) => {
+export const fetchAllUser = (filters) => async (dispatch) => {
     try {
-        const users = await axiosInstance.get(`/user`)
+        let endPoint = '/admin'
+
+        if (filters && Object.keys(filters).length) {
+            Object.entries(filters).forEach(([key, value], index) => {
+                if (!index) endPoint += `?${key}=${value}`
+                else endPoint += `&${key}=${value}`
+            })
+        }
+        const users = await axiosInstance.get(endPoint)
+
         dispatch(setUser(users))
+        console.log(users);
+
     } catch (error) {
         console.log(error.message)
     }
 }
+
+
 
 export const {
     setAllUsers,

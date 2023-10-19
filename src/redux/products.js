@@ -43,6 +43,7 @@ export const fetchProducts = (filters) => async (dispatch) => {
         }
         const products = await axiosInstance.get(endPoint)
         dispatch(setProducts(products))
+        console.log(products);
     } catch (error) {
         // Captura cualquier error que pueda ocurrir durante la solicitud
         console.error('Error:', error);

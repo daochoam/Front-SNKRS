@@ -4,23 +4,28 @@
   width: 100%;
 }
 
+.homediv {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  gap: 30px;
+  margin-bottom: 0;
+  margin-top: 25px;
+}
+
+.filter{
+  display: flex;
+}
 
 .zapatilla {
 
-
-  margin-left: 80px;
-
-}
-
-.homediv {
   display: flex;
-  justify-content: space-between;
-  width: 700px;
-
-  margin-bottom: 0;
-  margin-top: 25px;
-  margin-left: 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+
 
 .homebtn {
   position: relative;

@@ -32,7 +32,7 @@ const recordSlice = createSlice({
 
 export const fetchRecord = () => async (dispatch) => {
   try {
-    const response = await axiosInstance.get("/shopping?status=approved");
+    const response = await axiosInstance.get("/shopping");
     console.log("response record",response);
     dispatch(getRecord(response));
   } catch (error) {

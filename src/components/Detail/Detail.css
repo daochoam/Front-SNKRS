@@ -73,8 +73,7 @@
   display: flex;
   justify-content: space-between;
 }
-
-.views .show-table-button {
+.show-table-button{
   background: transparent;
   border: none;
 }
@@ -157,6 +156,7 @@
   gap: 5px;
   grid-template-columns: repeat(4, 1fr);
   width: 35px;
+  animation: bounceIn 2s .5s ;
 }
 
 .size a {
@@ -173,7 +173,7 @@
   box-shadow: 0 5px 7px #000000b4;
   font-size: 14px;
   font-family: MontHeavy;
-
+  
 
 }
 
@@ -181,7 +181,6 @@
 .size .selected {
   background-color: #000;
   color: #fff;
-
   box-shadow: rgba(204, 219, 232, 0.366) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.41) -3px -3px 6px 1px inset;
 }
 
@@ -206,6 +205,7 @@
   background: #d9d9d9;
   text-align: center;
   font-size: 24px;
+  margin-top: -0px;
 }
 
 .bo .heart:hover {
@@ -480,3 +480,131 @@
 .SelectedColor {
   transform: scale(1.2);
 }
+/* info */
+.slidi {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 20px 0;
+  text-align: center;
+  margin-top: 90px;
+}
+
+.slidi h1 {
+  font-family: MontHeavy;
+}
+
+.sliderArro {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.126);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 32px;
+  color: #fff;
+  z-index: 2;
+  transition: background 0.3s;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leftArrow {
+  left: 0;
+}
+
+.rightArrow {
+  right: 0;
+}
+
+.leftArrow:hover,
+.rightArrow:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.slideTrack {
+  display: flex; /* Hacer que las tarjetas se muestren en una fila horizontal */
+  overflow-x: scroll; /* Permitir el desplazamiento horizontal */
+  padding-bottom: 20px;
+  margin: 20px 0;
+  white-space: nowrap; /* Evitar saltos de línea */
+}
+
+/* Otras reglas CSS permanecen iguales */
+
+
+.start {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  text-align: center;
+  padding: 8px 8px;
+  border: 2px solid #000;
+  width: 260px;
+  font-size: 26px;
+  margin-left: 40px;
+  margin-top: 60px;
+}
+
+.slid {
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin: 20px;
+  width: 300px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.baI {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.063);
+  margin-bottom: 10px;
+}
+
+.comment {
+  padding: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.comment h3 {
+  font-family: MontRegular;
+}
+
+.comment p {
+  font-family: MontLight;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: gold;
+  margin: 10px auto;
+}
+
+
+.star-filled {
+  color: gold; /* Color para estrellas pintadas */
+}
+
+.star-outline {
+  color: #ddd; /* Color para estrellas sin pintar (puedes ajustarlo) */
+}
+
+

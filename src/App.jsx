@@ -14,8 +14,9 @@ import PaymentSucces from './views/Payment/PaymentSucces';
 import Trolley from './views/Trolley/Trolley';
 import ProtectedRoutes from './utils/ProtectedRoutes';
 import Page404 from './views/Page404/Page404';
-import Views from './components/Views/Views';
+
 import Genders from './views/Genders/Genders';
+import Views from './components/Reviews/Reviews';
 
 
 function App() {
@@ -46,8 +47,8 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/checkout" element={<Payment />} />
         <Route path="/payment-succes" element={<PaymentSucces />} />
-        <Route path="/views" element={<Views />} />
-
+        <Route path="/reviews/:id" element={<Views/>} />
+        
         {/* <Route path="/user" element={<DashboardUser />} /> */}
 
         {/* //?Routes USER */}

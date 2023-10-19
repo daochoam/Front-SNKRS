@@ -1,0 +1,218 @@
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  margin: 100px auto;
+}
+.foto{
+  display: flex;
+  justify-content: space-between;
+}
+.foto .userImage{
+  border-radius: 50%;
+}
+.nombre {
+ width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  
+}
+.nombre .userImage{
+  justify-content: center;
+  margin: 0 auto;
+}
+.nombre .datos{
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.review-card {
+    display: flex;
+    flex-direction: column;
+    
+  width: 700px;
+  background: #fff;
+  padding: 25px 15px;
+  border: 1px solid #ccc;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.title {
+  width: 100%;
+  display: flex;
+  font-family: MontHeavy;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-family: MontHeavy;
+}
+
+.rating-section,
+.recommend-section,
+.review-section {
+  margin: 10px 0;
+}
+.rating-section .ove{
+  font-family: MontRegular;
+  color: #000;
+}
+.recommend-section .ove {
+  font-family:MontRegular;
+  color: #000;
+
+}
+.size-satisfaction-section .ove{
+  font-family:MontRegular;
+  color: #000;
+}
+.stars {
+  display: flex;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.star-filled {
+  color: #ffd700; /* Color dorado para estrellas llenas */
+}
+
+.star-empty {
+  color: #ccc; /* Color gris para estrellas vacías */
+}
+
+
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  font-size: 16px;
+  font-family: MontLight;
+  border: 1px solid #ccc;
+}
+.recommend-buttons {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+.size-satisfaction-buttons{
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+.recommend-buttons .la {
+  font-family: MontRegular;
+  margin-top: 20px;
+}
+.boton {
+  padding: 4px 12px;
+  width: 200px;
+  background: #000;
+  border: none;
+  color: #fff;
+  margin-top: 30px;
+  font-family: MontHeavy;
+}
+.boton:hover{
+  background: #fff;
+  border: 1px solid #000;
+  color: #000;
+  font-family: MontHeavy;
+}
+.zapa {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 0;
+  border-bottom: 4px dotted #0000007b;
+  gap: 10px;
+}
+.zapa img {
+  width: 200px;
+  
+}
+.producto {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin:0;
+  margin-bottom: 70px;
+}
+.data{
+  display: flex;
+  flex-direction: column;
+}
+.data h1{
+  font-family: MontHeavy;
+}
+.data h2{
+  font-family: MontLight;
+  font-size: 25px;
+}
+.data .type{
+  font-weight: 700;
+}
+.data p{
+  font-family: MontLight;
+}
+.in{
+  margin-top: 60px;
+  border-bottom: 4px dotted #0000007b;
+  margin-bottom: 80px;
+}
+.in h3{
+  font-family: MontHeavy;
+}
+.in p{
+  font-family: MontLight;
+}
+
+.selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
+}
+
+.cara {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+  width: 200px;
+  padding: 0 5px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+.emoji{
+  margin: 0;
+  font-size: 30px;
+}
+
+.cara:hover {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.selected {
+  background-color: #000;
+  color: white;
+  border-color: #000;
+}
+
+h2 {
+  font-size: 20px;
+  font-family: MontHeavy
+}
+
+p {
+  margin-top: 10px;
+  font-weight: bold;
+  font-family: MontLight;
+}

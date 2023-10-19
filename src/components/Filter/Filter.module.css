@@ -1,5 +1,5 @@
 .filter{
- 
+ display: flex;
   padding: 10px 16px;
   background: #d4d4d463;
   border-radius: 5px;
@@ -33,15 +33,12 @@
   color: #a4838376;
 }
 .bar{
-  display: block;
   width: 99%;
   height: 2px;
   background:#828282 ;
-  position: relative;
   bottom: 10px;
 }
 .img{
-  position: relative;
   bottom: 10px;
 }
 

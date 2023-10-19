@@ -36,16 +36,17 @@
 
 .cardPromo h2{
     font-family: MontHeavy;
-    font-size: 36px;
+    font-size: 22px;
     font-weight: 400;
     margin: 0;
+    width: 140px;
 
 }
 
 .cardPromo h3{
     margin: 0;
     font-family: MontHeavy;
-    font-size: 24px;
+    font-size: 22px;
     font-style: normal;
     margin-top: 10px;
 }
@@ -53,7 +54,7 @@
 .cardPromo p{
     margin: 0;
     font-family: MontLight;
-    font-size: 20px;
+    font-size: 14px;
 }
 
 .cardPromoInfo{
@@ -84,7 +85,11 @@
     margin: 0px 1px;
     margin-bottom: 20px;
   }
-  
+
+  .containe {
+    text-decoration: none;
+    color: #101010;
+  }
 
 
 

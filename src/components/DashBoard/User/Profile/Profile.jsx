@@ -1,16 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Profile.module.css";
-import { FaRegEdit, FaPlus } from "react-icons/fa";
+import {
+  FaRegEdit,
+  FaBirthdayCake,
+  FaMapMarkerAlt,
+  FaCity,
+  FaMapPin,
+  FaPhone,
+} from "react-icons/fa";
+import { BsPersonBoundingBox } from "react-icons/bs";
+import { GoMail } from "react-icons/go";
+import { BiWorld } from "react-icons/bi";
+import Swal from "sweetalert2";
+
 import { fetchUserById, updateUser, selectUser } from "../../../../redux/user";
 import moment from "moment";
-import { MAX_YEAR_REGISTER, MIN_YEAR_REGISTER } from "../../../../const";
+import { ICONS, MAX_YEAR_REGISTER, MIN_YEAR_REGISTER } from "../../../../const";
+import { fetchCity, fetchCountry, fetchState } from "../../../../redux/country";
+import { InputSelect } from "../../../Inputs";
 
 const Profile = () => {
+
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   console.log("Información del usuario:", user);
-
+  const [profileCompletion, setProfileCompletion] = useState(0);
   const [imageUrl, setImageUrl] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -26,8 +41,8 @@ const Profile = () => {
     phone: "",
   });
 
-  const calculateProfileCompletion = (user) => {
-    const totalFields = 10;
+  const calculateProfileCompletion = (myUser) => {
+    const totalFields = 9;
     const fieldsToConsider = [
       "firstName",
       "lastName",
@@ -41,7 +56,14 @@ const Profile = () => {
     ];
 
     const filledFields = fieldsToConsider.reduce((count, field) => {
-      if (user[field] && user[field].length > 0) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (
+        // eslint-disable-next-line no-prototype-builtins
+        myUser.hasOwnProperty(field) &&
+        myUser[field] &&
+        myUser[field].length
+      ) {
+        console.log("field", field);
         return count + 1;
       }
       return count;
@@ -60,8 +82,7 @@ const Profile = () => {
     if (user) {
       const { image, ...userData } = user;
       const userBirthday = moment.utc(user.birthday).format("YYYY-MM-DD");
-      setImageUrl(image);
-      setUpdatedFields({
+      const actualUser = {
         ...updatedFields,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -71,8 +92,14 @@ const Profile = () => {
         state: user?.address?.[0]?.state || "",
         city: user?.address?.[0]?.city || "",
         address: user?.address?.[0]?.address || "",
-        phone: user?.address?.[0]?.phone || "",
-      });
+        phone:
+          (user?.address?.[0]?.phone && `${user?.address?.[0]?.phone}`) || "",
+      };
+      console.log(actualUser, "actualUser");
+      setImageUrl(image);
+      setUpdatedFields(actualUser);
+
+      setProfileCompletion(calculateProfileCompletion(actualUser));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
@@ -86,24 +113,9 @@ const Profile = () => {
     event.preventDefault();
     console.log("Save button clicked");
     if (Object.keys(updatedFields).length > 0) {
-      console.log("Updated Fields:", updatedFields);
       const formData = new FormData(event.target);
-      dispatch(
-        updateUser(formData)
-        // updateUser({
-        //   firstName: updatedFields.firstName,
-        //   lastName: updatedFields.lastName,
-        //   email: updatedFields.email,
-        //   birthday: updatedFields.birthday,
-        //   address: {
-        //     country: updatedFields.country ,
-        //     state: updatedFields.state  ,
-        //     city: updatedFields.city ,
-        //     address: updatedFields.address ,
-        //     phone: updatedFields.phone ,
-        //   },
-        // })
-      );
+      console.log("Updated Fields:", updatedFields);
+      dispatch(updateUser(formData));
     }
     setIsEditing(false);
   };
@@ -117,10 +129,12 @@ const Profile = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setUpdatedFields({
+    const editUser = {
       ...updatedFields,
       [name]: value,
-    });
+    };
+    setUpdatedFields(editUser);
+    setProfileCompletion(calculateProfileCompletion(editUser));
   };
 
   const handleProfilePictureClick = (event) => {
@@ -133,155 +147,181 @@ const Profile = () => {
       setImageUrl(imageUrl);
     }
   };
-
-  const profileCompletion = calculateProfileCompletion(user);
+  const handlerInputChange = (field, value) => {
+    const currentValue = { ...updatedFields, [field]: value };
+    setUpdatedFields(currentValue);
+  };
 
   return (
-    <div className={styles.userProfile}>
-      <div className={styles.progress}>
-        <span className={styles.progressMessage}>
-          {profileCompletion === 100
-            ? "Perfil Completo"
-            : `Perfil ${profileCompletion.toFixed(
-              0
-            )}% completado, por favor completa los campos faltantes`}
-        </span>
+    <form onSubmit={handleSaveClick}>
+      <div className={styles.userProfile}>
+        <div className={styles.formContainer}>
+          <>
+            <span className={styles.progressMessage}>
+              {profileCompletion === 100
+                ? "Perfil Completo"
+                : `Perfil ${profileCompletion.toFixed(
+                    0
+                  )}% completado, por favor completa los campos faltantes`}
+            </span>
+            <div className={styles.progressBar}>
+              <div
+                className={styles.progressFill}
+                style={{ width: `${profileCompletion}%` }}
+              ></div>
+            </div>
+          </>
+          <div className={styles.content}>
+            <div className={styles.contentContainer}>
+              <div className={styles.imageContainer}>
+                <img
+                  className={styles.userImage}
+                  src={imageUrl}
+                  alt="User Image"
+                />
+                <input
+                  name="newImageUser"
+                  type="file"
+                  onChange={(event) => handleProfilePictureClick(event)}
+                />
+              </div>
+            </div>
+            <div className={styles.contentTextWithButton}>
+              <div className={styles.formTextContent}>
+                <div className={styles.formLabelContent}>
+                  <label className={styles.label}>
+                    <BsPersonBoundingBox /> First Name:
+                  </label>
+                  <label className={styles.label}>
+                    <BsPersonBoundingBox /> Last Name:
+                  </label>
+                  <label className={styles.label}>
+                    <GoMail /> Email:
+                  </label>
+                  <label className={styles.label}>
+                    <FaBirthdayCake /> Birthday:
+                  </label>
+                  <label className={styles.label}>
+                    <BiWorld /> Country:
+                  </label>
+                  <label className={styles.label}>
+                    <FaMapMarkerAlt /> State:
+                  </label>
+                  <label className={styles.label}>
+                    <FaCity /> City:
+                  </label>
+                  <label className={styles.label}>
+                    <FaMapPin /> Address:
+                  </label>
+                  <label className={styles.label}>
+                    <FaPhone /> Phone:
+                  </label>
+                </div>
+                <div className={styles.formInputContent}>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={updatedFields.firstName || ""}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={updatedFields.lastName || ""}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className={styles.input}
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    value={updatedFields.email || ""}
+                    onChange={handleChange}
+                    disabled={true}
+                    className={styles.input}
+                  />
+                  <input
+                    type="date"
+                    name="birthday"
+                    min={MIN_YEAR_REGISTER}
+                    max={MAX_YEAR_REGISTER}
+                    value={updatedFields.birthday || ""}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    name="country"
+                    value={updatedFields.country || ""}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    name="state"
+                    value={updatedFields.state || ""}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    name="city"
+                    value={updatedFields.city || ""}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    name="address"
+                    value={updatedFields.address || ""}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    name="phone"
+                    value={updatedFields.phone || ""}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                    className={styles.input}
+                  />
+                </div>
+              </div>
+              <div>
+                {isEditing ? (
+                  <div className={styles.editButtons}>
+                    <button type="submit" className={styles.buttonSave}>
+                      Save
+                    </button>
 
-        <div className={styles.progressBar}>
-          <div
-            className={styles.progressFill}
-            style={{ width: `${profileCompletion}%` }}
-          ></div>
+                    <button
+                      className={styles.buttonCancel}
+                      onClick={handleCancelClick}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className={styles.buttonEdit}
+                    onClick={handleEditClick}
+                  >
+                    Edit <FaRegEdit />
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <form onSubmit={handleSaveClick}>
-        <div className={styles.userImage}>
-          <img className={styles.userImage} src={imageUrl} alt="User Image" />
-          <input
-            name="newImageUser"
-            type="file"
-            className={styles.btn}
-            onChange={(event) => handleProfilePictureClick(event)}
-          />
-          <FaPlus className={styles.plus} />
-        </div>
-
-        <div className={styles.userInfo}>
-          <div className={styles.field}>
-            <label className={styles.label}>First Name:</label>
-            <input
-              className={`${styles.input} ${isEditing ? styles.edit : ""}`}
-              type="text"
-              name="firstName"
-              value={updatedFields.firstName || ""}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.field}>
-            <label className={styles.label}>Last Name:</label>
-            <input
-              className={`${styles.input} ${isEditing ? styles.edit : ""}`}
-              type="text"
-              name="lastName"
-              value={updatedFields.lastName || ""}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.field}>
-            <label className={styles.label}>Email:</label>
-            <input
-              className={`${styles.input} ${isEditing ? styles.edit : ""}`}
-              type="email"
-              name="email"
-              value={updatedFields.email || ""}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.field}>
-            <label className={styles.label}>Birthday:</label>
-            <input
-              className={`${styles.input} ${isEditing ? styles.edit : ""}`}
-              type="date"
-              name="birthday"
-              min={MIN_YEAR_REGISTER}
-              max={MAX_YEAR_REGISTER}
-              value={updatedFields.birthday || ""}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.field}>
-            <label className={styles.label}>Country:</label>
-            <input
-              className={`${styles.input} ${isEditing ? styles.edit : ""}`}
-              type="text"
-              name="country"
-              value={updatedFields.country || ""}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.field}>
-            <label className={styles.label}>State:</label>
-            <input
-              className={`${styles.input} ${isEditing ? styles.edit : ""}`}
-              type="text"
-              name="state"
-              value={updatedFields.state || ""}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.field}>
-            <label className={styles.label}>City:</label>
-            <input
-              className={`${styles.input} ${isEditing ? styles.edit : ""}`}
-              type="text"
-              name="city"
-              value={updatedFields.city || ""}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.field}>
-            <label className={styles.label}>Address:</label>
-            <input
-              className={`${styles.input} ${isEditing ? styles.edit : ""}`}
-              type="text"
-              name="address"
-              value={updatedFields.address || ""}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.field}>
-            <label className={styles.label}>Phone:</label>
-            <input
-              className={`${styles.input} ${isEditing ? styles.edit : ""}`}
-              type="text"
-              name="phone"
-              value={updatedFields.phone || ""}
-              onChange={handleChange}
-            />
-          </div>
-
-          {isEditing ? (
-            <div className={styles.editButtons}>
-              <button
-                type="submit"
-                className={styles.buttonSave} >
-                Save
-              </button>
-              <button
-                className={styles.buttonCancel}
-                onClick={handleCancelClick}
-              >
-                Cancel
-              </button>
-            </div>
-          ) : (
-            <button className={styles.buttonEdit} onClick={handleEditClick}>
-              <FaRegEdit />
-            </button>
-          )}
-        </div>
-      </form>
-    </div>
+    </form>
   );
 };
 

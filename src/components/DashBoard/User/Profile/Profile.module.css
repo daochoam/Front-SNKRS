@@ -1,45 +1,81 @@
 .userProfile {
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin: 20px;
-  margin-top:15%;
-  margin-left: 20%;
+  height: 100vh;
 }
 
-.userImage {
-  width: 150px;
-  border-radius: 50%;
-  margin-right: 50px;
-  margin-left: -20%
-
-}
-
-.userInfo {
-  flex-grow: 1;
-  padding: 10px;
-}
-
-.field {
+.formContainer {
+  padding: 20px;
+  width: 200%;
+  max-width: 60%;
+  margin-top: 5%;
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-   width: 60%;
+  flex-direction: column;
+}
+
+.content {
+  margin-top: 100px;
+  display: flex;
+  width: 100%;
+  gap: 200px;
+}
+
+.formTextContent{
+  width: 100%;
+  display: flex;  
+}
+
+.contentTextWithButton{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.formLabelContent{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 5px;
+}
+
+.formInputContent{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  display: flex;
+  margin-top: 50px;
+}
+.userImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 20%;
 }
 
 .label {
   font-weight: bold;
-  width: 120px;
   font-family: MontHeavy;
 }
 
 .input {
-  flex-grow: 1;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  padding: 8px;
+  border: 2px solid #000;
+  border-radius: 10px;
   font-family: MontRegular;
-  width: 60%;
+  flex-grow: 1;
+}
 
+.userInfo {
+  margin: 450px;
 }
 
 .button {
@@ -57,15 +93,17 @@
 
 .buttonSave {
   background-color: #000000;
-  color:white;
-  margin-right: 5px
+  color: white;
+  margin-right: 5px;
+  margin-top: 20px;
 }
 .buttonSave:hover {
   border: 3px solid #000000;
 }
 .buttonCancel {
   background-color: #000000;
-  color:white;
+  color: white;
+  margin-top: 20px;
 }
 
 .buttonCancel:hover {
@@ -74,16 +112,13 @@
 .buttonEdit {
   background-color: #000000;
   color: #fff;
+  margin-top: 20px;
 }
 .buttonEdit:hover {
   border: 3px solid #000000;
 }
 
-.plus{
-  color: black;
-  background-color: white;
-}
-.btn{
+.btn {
   border-color: white;
 }
 .progress {
@@ -106,7 +141,18 @@
   border-radius: 5px;
   position: relative;
 }
+.InputSelect {
+  width: 60%;
+  margin-bottom: 10px;
+}
 
+.WrapperCountry {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
 .progressFill {
   height: 100%;
   border-radius: 5px;
@@ -115,6 +161,10 @@
 }
 .edit {
   border: 1px solid #0d0d0d;
-  background-color: #fff; 
-  color: #000; 
+  background-color: #fff;
+  color: #000;
+}
+.containerbarra {
+  margin-top: -80%;
+  margin-bottom: 20px;
 }

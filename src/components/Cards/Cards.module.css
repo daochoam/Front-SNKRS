@@ -101,8 +101,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  margin: 10px auto;
-  width: 500px;
+  width: 1000px;
   text-decoration: none;
 
 }
@@ -162,6 +161,30 @@
   max-width: 100%;
   height: auto;
 }
+
+.outStock{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-width: 900px;
+  height: 400px;
+}
+
+.outStock h3{
+  font-family: MontHeavy;
+  font-size: 90px;
+}
+
+.outStock h2{
+  font-family: MontBold;
+}
+
+.outStock h4{
+  font-family: MontHeavy;
+  font-size: 20px;
+}
+
 
 /* Estilos para los botones de paginación */
 

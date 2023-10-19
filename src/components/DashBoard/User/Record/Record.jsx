@@ -1,21 +1,45 @@
-import React, { useState,useEffect } from "react";
+/** @format */
+
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DashBoard from '../../DashBoard.module.css'
-import styles from "./Record.module.css"
+import { useParams } from "react-router-dom";
+import DashBoard from "../../DashBoard.module.css";
+import styles from "./Record.module.css";
 import { fetchRecord } from "../../../../redux/recordSlice";
 import { Link } from "react-router-dom";
-import { setSortingMethod } from "../../../../redux/recordSlice";
+import { setSortingMethod} from "../../../../redux/recordSlice";
+import { ICONS } from "../../../../const";
+
+
 const Record = () => {
   const dispatch = useDispatch();
+  const { id } = useParams();
+  const [rating, setRating] = useState(0);
+  const [recommend, setRecommend] = useState(true);
+  const [review, setReview] = useState("");
+  const [opinion, setopinion] = useState("");
+  const [aboutSize, setaboutSize] = useState("fine");
+  const [serviceComment, setServiceComment] = useState("");
+  const zapatillas = useSelector((state) => state.record.record);
+  const [selectedFace, setSelectedFace] = useState('according');
+  const [imageUrl, setImageUrl] = useState("");
 
   const [sorting, setSorting] = useState("asc");
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1);
   const record = useSelector((state) => {
-    console.log("🚀 ~ file: Record.jsx:9 ~ Record ~ state:", state.record.record)
-    return state.record.record
+    console.log(
+      "🚀 ~ file: Record.jsx:9 ~ Record ~ state:",
+      state.record.record
+    );
+    return state.record.record;
   });
+
+
   
-console.log(record)
+
+
+
+  console.log(record);
   useEffect(() => {
     dispatch(fetchRecord());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -24,6 +48,7 @@ console.log(record)
     const selectedSorting = e.target.value;
     setSorting(selectedSorting);
     dispatch(setSortingMethod(selectedSorting));
+    
   };
   const getPaginatedRecord = () => {
     const itemsPerPage = 3;
@@ -66,12 +91,14 @@ console.log(record)
                   <th>Review</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className={styles.TableData}>
                 {getPaginatedRecord().map((recordItem, index) => (
                   <React.Fragment key={index}>
                     <tr>
                       <td rowSpan={recordItem.purchase.length + 1}>
-                        {new Date(recordItem.purchase_date).toLocaleDateString()}
+                        {new Date(
+                          recordItem.purchase_date
+                        ).toLocaleDateString()}
                       </td>
                     </tr>
                     {recordItem.purchase.map((product, productIndex) => (
@@ -79,17 +106,25 @@ console.log(record)
                         <td>{product.model}</td>
                         <td>
                           <img
-                            src={product.image?.src}
-                            alt={product.model}
-                            style={{ maxWidth: '100px' }}
+                            src={product?.image}
+                            alt={product?.model}
+                            style={{ maxWidth: "100px" }}
                           />
                         </td>
                         <td>${product.price}</td>
                         <td>{product.quantity}</td>
                         <td>{product.size}</td>
-                        <td>{product.color}</td>
-                        <td>{product.gener}</td>
-                        <td><button>Review</button></td>
+                        <td><h3 title={product?.color?.name}>{ICONS.COLORS(product?.color?.html)}</h3></td>
+                        <td>{product.gender}</td>
+                        <td>
+                          <Link
+                            to={`/reviews/${product.Product_id}`}
+                            className={styles.reviewButton}
+                           
+                          >
+                            Review
+                          </Link>
+                        </td>
                       </tr>
                     ))}
                   </React.Fragment>
@@ -104,7 +139,9 @@ console.log(record)
               >
                 Back
               </button>
-              <span className={styles.currentPage}>Page {currentPage} of {totalPages}</span>
+              <span className={styles.currentPage}>
+                Page {currentPage} of {totalPages}
+              </span>
               <button
                 onClick={() => setCurrentPage(currentPage + 1)}
                 disabled={currentPage * 3 >= record.length}
@@ -121,11 +158,3 @@ console.log(record)
 };
 
 export default Record;
-
-
-
-
-
-
-
-

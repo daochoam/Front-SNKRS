@@ -39,11 +39,13 @@ const LogIn = ({ imageSrc, onChangeImage, defaultImage, style = { size: '55px' }
 
   const handlerClickLogin = () => {
     dispatch(viewFormLog())
+    console.log('Usuario que está iniciando sesión:', cookie);
   }
 
   const handlerChangeSignIn = (status) => {
     dispatch(setViewLogin());
   }
+  
 
 
   if (!cookie) {

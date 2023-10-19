@@ -4,7 +4,6 @@ import DashBoard from '../../DashBoard.module.css'
 import styles from './Product.module.css';
 import InfoProduct from "./InfoProduct/InfoProduct";
 import StockProduct from "./StockProduct/StockProduct";
-import RenderView from "../../../DashboardUser/RenderView";
 import Logo from "../../../Icons/Logo";
 import { PRODUCT_STORAGE } from "../../../../const";
 
@@ -97,7 +96,7 @@ const Product = () => {
               )}
               {steps === 3 && (
                 <div className={styles.Info}>
-                  <RenderView />
+                  {/* <RenderView /> */}
                 </div>
               )}
             </div>
