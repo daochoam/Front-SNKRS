@@ -1,10 +1,11 @@
 import styles from "./Promo.module.css";
 import marca from "../../assets/Image/image3.png";
+import { Link } from "react-router-dom";
 
 const Promo = () => {
   const zapatillasData = [
     {
-      id: 1,
+      id: '65316f7c8c9f6370eb9af6c9',
       name: "Yeezy",
       price: 75.99,
       type: "SPLV-350",
@@ -15,7 +16,7 @@ const Promo = () => {
       size: "4",
     },
     {
-      id: 2,
+      id: '6531707c8c9f6370eb9af7a0',
       name: "Yeezy",
       price: 199.99,
       type: "SPLV-350",
@@ -36,6 +37,12 @@ const Promo = () => {
           </div>
           <div className={styles.cardsPromo}>
 
+          <Link
+                to={zapatillasData[1].id !== '' ? `/detail/${zapatillasData[1].id}` : ''}
+                className={styles.containe}
+                key={zapatillasData[1].id}
+                style={{ textDecoration: "none" }}
+              >
           <div className={styles.cardPromo}>
               <div className={styles.cardPromoImage}>
                 <img
@@ -53,7 +60,15 @@ const Promo = () => {
                 </div>
               </div>
             </div>
+            </Link>
 
+
+            <Link
+                to={zapatillasData[0].id !== '' ? `/detail/${zapatillasData[0].id}` : ''}
+                className={styles.containe}
+                key={zapatillasData[0].id}
+                style={{ textDecoration: "none" }}
+              >
             <div className={styles.cardPromo}>
               <div className={styles.cardPromoImage}>
                 <img
@@ -71,6 +86,8 @@ const Promo = () => {
                 </div>
               </div>
             </div>
+            </Link>
+
           </div>
         </div>
         <div className={styles.image}></div>

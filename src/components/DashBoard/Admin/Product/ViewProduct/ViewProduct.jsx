@@ -7,19 +7,20 @@ const ViewProduct = ({ infoProduct }) => {
     const [product, setProduct] = useState({})
 
     useEffect(() => {
-        setProduct(
-            {
+        if (infoProduct?.image?.[0]?.file instanceof Blob) {
+            setProduct({
                 _id: '',
-                image: URL.createObjectURL(infoProduct?.image?.[0]?.file),
-                model: infoProduct?.model,
-                type: infoProduct?.type,
-                brand: { brand: infoProduct?.brand },
-                price: infoProduct?.price,
-                stock: infoProduct?.stock
-
-            }
-        )
-    }, [infoProduct])
+                image: URL.createObjectURL(infoProduct.image[0].file),
+                model: infoProduct.model,
+                type: infoProduct.type,
+                brand: { brand: infoProduct.brand },
+                price: infoProduct.price,
+                stock: infoProduct.stock
+            });
+        } else {
+            console.error('infoProduct.image[0].file no es un Blob o File válido.');
+        }
+    }, [infoProduct]);
 
     return (
         <div className={styles.ViewContainer}>

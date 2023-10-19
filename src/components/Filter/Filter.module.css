@@ -1,5 +1,6 @@
 .filter{
  display: flex;
+ flex-direction: column;
   padding: 10px 16px;
   background: #d4d4d463;
   border-radius: 5px;
@@ -11,14 +12,15 @@
 }
 
 .filter h3{
-  font-family: MontSemi;
-  color: #828282;
-  font-size: 20px;
+  font-family: MontHeavy;
+  color: #101010;
+  font-size: 18px;
 }
 .title{
+  margin-top: 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  text-indent: 14px;
 }
 .title a{
   text-decoration: none;
@@ -75,4 +77,48 @@
 .filter1 button:hover{
   background-color: white;
   color: #101010;
+}
+
+
+.DataInputsProducts{
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+
+}
+
+
+.DataInputsProducts{
+  display: flex;
+  justify-content: center;
+}
+
+.KeyData{
+  font-family: MontBold;
+  font-size: 16px;
+  text-indent: 5px;
+}
+
+.data{
+  font-family: MontBold;
+  font-size: 16px;
+  border-radius: 10px;
+  text-indent: 5px;
+  min-height: 40px;
+  max-height: 40px;
+  width: 200px;
+  border: 2px solid #101010;
+}
+
+.searchBar button{
+  margin-left: 10px;
+  color: #000;
+  width: 100px;
+  margin-top: 20px;
+  margin-left: 10px;
+  min-height: 40px;
+  max-height: 40px;
+  font-family: MontBold;
+  border-radius: 10px;
+  background-color: white;
 }

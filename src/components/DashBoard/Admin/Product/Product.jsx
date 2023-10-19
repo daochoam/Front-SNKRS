@@ -3,13 +3,13 @@ import DashBoard from '../../DashBoard.module.css'
 import styles from './Product.module.css';
 import InfoProduct from "./InfoProduct/InfoProduct";
 import StockProduct from "./StockProduct/StockProduct";
-import { ICONS, MENU_ADMIN, NAVBAR_LINKS, NAV_ADMIN, PRODUCT_STORAGE } from "../../../../const";
+import { ICONS, MENU_ADMIN, NAVBAR_LINKS, NAV_ADMIN, PRODUCT_STORAGE, SESSION_NOT_COOKIE } from "../../../../const";
 import ViewProduct from "./ViewProduct/ViewProduct";
 import hasEmptyFields from "./Components/hasEmptyFields";
 import { ConfirmCreateProduct, ErrorProduct, FieldsEmpty, NonDataStock, NonImageSelected, ProductSuccess } from "../../../Alerts";
 import { useSelector } from "react-redux";
 import getIdByName from "./Components/getIdByName";
-import { Navigate } from "react-router-dom";
+import { Navigate, redirect } from "react-router-dom";
 import axiosInstance from "../../../../utils/axiosInstance";
 
 const initProduct = {
@@ -42,10 +42,6 @@ const Product = () => {
   const types = useSelector(({ filters }) => filters.detail.types)
   const categories = useSelector(({ filters }) => filters.detail.categories)
 
-
-  useEffect(() => {
-    localStorage.removeItem(PRODUCT_STORAGE)
-  }, [success])
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem(PRODUCT_STORAGE));
@@ -98,12 +94,14 @@ const Product = () => {
       const { _id } = await axiosInstance.post(`/products`, ProductCreate)
       const data = await axiosInstance.put(`/products/images/${_id}`, formData)
       ProductSuccess()
+      localStorage.removeItem(PRODUCT_STORAGE)
       setSuccess(true)
 
     } catch (error) {
       ErrorProduct()
     }
   }
+
 
   const handlerChangeProduct = (data) => {
     let currentValue = {}
@@ -113,8 +111,8 @@ const Product = () => {
     localStorage.setItem(PRODUCT_STORAGE, JSON.stringify(currentValue));
   }
 
-  const onRedirect = (data) => {
-    setSuccess(data)
+  if (success) {
+    return <Navigate to={SESSION_NOT_COOKIE} />;
   }
 
   return (

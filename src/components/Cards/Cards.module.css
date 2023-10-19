@@ -24,7 +24,7 @@
   justify-content: space-between;
 }
 
-.price {
+.price p{
   position: relative;
   background: #080808;
   color: #fff;
@@ -41,6 +41,14 @@
 
 .type p {
   color: #000;
+  font-family: MontLight;
+  text-transform: uppercase;
+}
+
+.type span {
+  color: #000;
+  font-family: MontBold;
+  text-transform: uppercase;
 }
 
 .price div {
@@ -57,7 +65,7 @@
 }
 
 .letra {
-  font-family: MontLight;
+  font-family: MontBold;
 }
 
 .name .price p {
@@ -148,6 +156,7 @@
   margin: 8px;
   box-sizing: border-box;
   width: 300px;
+  height: 550px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   position: relative;
 }
