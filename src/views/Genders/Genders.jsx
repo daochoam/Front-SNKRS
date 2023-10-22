@@ -15,6 +15,7 @@ import Filter from "../../components/Filter/Filter";
 const Genders = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState('');
   const [pageGender, setPageGender] = useState(1);
   const [filter, setFilter] = useState();
   const products = useSelector(({ products }) => {
@@ -26,11 +27,13 @@ const Genders = () => {
     setFilter("");
   }, [pathname]);
 
-  useEffect(() => {
-    dispatch(
-      fetchProducts({ gender: pathname.slice(1), page: pageGender, ...filter })
-    );
-  }, [dispatch, pathname, pageGender, filter]);
+  useEffect (()=>{
+    if (searchTerm === '') {
+      dispatch(fetchProducts({gender: pathname.slice(1), page: pageGender, ...filter  }));
+    } else {
+      dispatch(fetchProducts({ gender: pathname.slice(1), page: pageGender, ...filter, search: searchTerm}));
+    }
+  }, [dispatch, pathname, pageGender, filter, searchTerm]);
 
   const handlerChangePage = (page) => {
     setPageGender(page);
@@ -39,6 +42,11 @@ const Genders = () => {
   const handleFilter = (data) => {
     setFilter(data);
     console.log("es data", data);
+  };
+
+  const clearSearch = () => {
+    setSearchTerm(''); // Limpia el término de búsqueda
+    setPageGender(1); // Restablece la página a 1
   };
 
   return (
@@ -50,6 +58,18 @@ const Genders = () => {
           <Filter onChangeFilter={handleFilter} path={pathname} />
         </div>
         <div className={styles.zapatilla}>
+        <div className={styles.searchBar}>
+          <input
+            type="text"
+            placeholder="Search all products..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          {/* <button onClick={handleSearch}>Search</button> */}
+          {searchTerm && (
+            <button onClick={clearSearch}>Clear Search</button>
+          )}
+      </div>
           <Cards products={products} />
           <Paginated
             currentPage={pages.currentPage}

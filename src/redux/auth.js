@@ -59,19 +59,16 @@ export const signIn = (userCredentials) => async (dispatch) => {
 
 export const signOut = () => async (dispatch) => {
     try {
-        await axiosInstance.post(`/auth/sign-out`)
-        dispatch(setLogOut());
-        dispatch(cleanFavorites())
-        dispatch(cleanTrolley())
-        removeCookieSession()
-        await logOut()
-        return
+        await axiosInstance.post(`/auth/sign-out`);
+    } catch (error) {
+        null
     }
-    catch (error) {
-        console.error('Error:', error.message);
-    }
+    dispatch(setLogOut());
+    dispatch(cleanFavorites());
+    dispatch(cleanTrolley());
+    removeCookieSession();
+    await logOut();
 }
-
 export const viewFormLog = () => (dispatch) => {
     const cookies = readCookieSession()
     if (cookies) {

@@ -186,6 +186,7 @@ const Detail = () => {
       NotLogin();
     }
   };
+
   return (
     <>
       <div className="detail-container">
@@ -259,9 +260,8 @@ const Detail = () => {
                               ? () => handleColorClick(name)
                               : null
                           }
-                          className={`${
-                            selectedColor === name ? "SelectedColor" : ""
-                          } `}
+                          className={`${selectedColor === name ? "SelectedColor" : ""
+                            } `}
                           style={{
                             opacity: !isColorAvailable ? 0.3 : 1,
                             cursor: !isColorAvailable
@@ -311,7 +311,7 @@ const Detail = () => {
           <div className="slidi">
             <div className="slideTrack">
               {Array.isArray(reviewsInfo?.reviews) &&
-              reviewsInfo?.reviews?.length > 0 ? (
+                reviewsInfo?.reviews?.length > 0 ? (
                 reviewsInfo?.reviews?.map((review) => (
                   <div key={review._id} className="slid">
                     <img
@@ -355,7 +355,7 @@ const Detail = () => {
           </button>
         </div>
 
-        <TopSales />
+        <TopSales onClickTopSales={scrollToTop} />
         <BeMember />
         <Footer />
       </div>

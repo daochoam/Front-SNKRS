@@ -70,8 +70,14 @@ const filters = createSlice({
       clearCategories: ({ data, detail }, action) => {
          data.categories = []
          detail.categories = []
+      },
+      clearFilters: (state, payload) => {
+         state.sortBy = null
+         state.brand = null
+         state.model = null
+         state.size = null
+         state.color = null
       }
-
    },
 });
 
@@ -86,10 +92,10 @@ export const fetchBrands = () => async (dispatch) => {
 }
 
 
-export const fetchTypes = (category) => async (dispatch) => {
+export const fetchTypes = (category = 'shoes') => async (dispatch) => {
    try {
       dispatch(clearTypes())
-      const detailTypes = await axiosInstance.get(`/features/type?category=${category}`)
+      const detailTypes = await axiosInstance.get(`/type?category=${category}`)
       const types = detailTypes.map(({ type }) => type)
       dispatch(setDataTypes({ types, detailTypes }))
    } catch (error) {
@@ -99,7 +105,7 @@ export const fetchTypes = (category) => async (dispatch) => {
 
 export const fetchCategories = () => async (dispatch) => {
    try {
-      const detailCategories = await axiosInstance.get(`/features/category`)
+      const detailCategories = await axiosInstance.get(`/category`)
       const categories = detailCategories.map((({ category }) => category))
       dispatch(setDataCategories({ categories, detailCategories }))
    } catch (error) {

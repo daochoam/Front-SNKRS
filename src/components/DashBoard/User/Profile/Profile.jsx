@@ -78,9 +78,9 @@ const Profile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  useEffect(() => {
+  const initialUserSetup = () => {
     if (user) {
-      const { image, ...userData } = user;
+      const { image } = user;
       const userBirthday = moment.utc(user.birthday).format("YYYY-MM-DD");
       const actualUser = {
         ...updatedFields,
@@ -101,6 +101,11 @@ const Profile = () => {
 
       setProfileCompletion(calculateProfileCompletion(actualUser));
     }
+  }
+
+
+  useEffect(() => {
+    initialUserSetup();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
@@ -123,7 +128,7 @@ const Profile = () => {
   const handleCancelClick = () => {
     // setUpdatedFields({});
     console.log("isEditing se ha cambiado a false");
-
+    initialUserSetup();
     setIsEditing(false);
   };
 

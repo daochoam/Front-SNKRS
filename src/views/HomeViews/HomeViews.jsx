@@ -14,6 +14,7 @@ import { fetchProducts, setProducts } from "../../redux/products";
 import axiosInstance from "../../utils/axiosInstance";
 import Paginated from "../../components/Paginated/Paginated";
 import TopSales from "../../components/TopSales/TopSales";
+import { setBrand } from "../../redux/filters";
 
 
 const HomeViews = () => {
@@ -21,38 +22,44 @@ const HomeViews = () => {
   const [pageGender, setPageGender] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(1); // Cambiado a una única variable de página
+  const brandFilter = useSelector(({ filters }) => filters.brand)
 
   const dispatch = useDispatch();
 
   const stocks = useSelector(({ products }) => {
     return products.products
-})
+  })
 
-const pages = useSelector(({ products }) => products.pages);
+  const pages = useSelector(({ products }) => products.pages);
 
-console.log(stocks);
+  console.log(stocks);
 
-useEffect (()=>{
-  if (searchTerm === '') {
-    dispatch(fetchProducts({ gender: "", page: page }));
-  } else {
-    dispatch(fetchProducts({ search: searchTerm, page: page }));
-  }
-}, [dispatch, pathname, page, searchTerm]);
+  useEffect(() => {
+    if (searchTerm === '') {
+      dispatch(fetchProducts({ gender: "", page: page }));
+    } else {
+      dispatch(fetchProducts({ search: searchTerm, page: page }));
+    }
+  }, [dispatch, pathname, page, searchTerm]);
 
-const handleSearch = () => {
-  setPage(1); 
-};
+  useEffect(() => {
+    dispatch(setBrand())
+  }, [])
+
+  const handlerSearch = (data) => {
+    setSearchTerm(data)
+    setPage(1);
+  };
 
 
-const handlerChangePage = (newPage) => {
-  setPage(newPage); 
-};
+  const handlerChangePage = (newPage) => {
+    setPage(newPage);
+  };
 
-const clearSearch = () => {
-  setSearchTerm(''); // Limpia el término de búsqueda
-  setPage(1); // Restablece la página a 1
-};
+  const clearSearch = () => {
+    setSearchTerm(''); // Limpia el término de búsqueda
+    setPage(1); // Restablece la página a 1
+  };
 
   return (
     <>
@@ -100,8 +107,8 @@ const clearSearch = () => {
 
       <div className={styles.tarjetas}>
 
-        
-      <div className={styles.searchBar}>
+
+        <div className={styles.searchBar}>
           <input
             type="text"
             placeholder="Search..."
@@ -112,30 +119,30 @@ const clearSearch = () => {
           {searchTerm && (
             <button onClick={clearSearch}>Clear Search</button>
           )}
-      </div>
-      
+        </div>
+
         <Cards products={stocks} />
 
         <Paginated
-            currentPage={pages.currentPage}
-            totalPages={pages.totalPages}
-            onChangePage={handlerChangePage}
-          />
+          currentPage={pages.currentPage}
+          totalPages={pages.totalPages}
+          onChangePage={handlerChangePage}
+        />
       </div>
 
 
 
-        <div className={styles.homer}>
-          <TopSales />
-        </div>
+      <div className={styles.homer}>
+        <TopSales />
+      </div>
 
-        <div>
-          <Banner1 />
-        </div>
-        <BeMember />
+      <div>
+        <Banner1 onSelectBrand={handlerSearch} />
+      </div>
+      <BeMember />
 
-        <Newsletter />
-        <Footer />
+      <Newsletter />
+      <Footer />
     </>
   );
 };
@@ -143,18 +150,18 @@ const clearSearch = () => {
 export default HomeViews;
 
 
-  // // Función para buscar por modelo
-  // const handleSearchByModel = (model) => {
-  //   // Realiza la solicitud a la API para buscar por modelo
-  //   axiosInstance
-  //     .get(`/products?model=${model}`)
-  //     .then((response) => {
-  //       const data = response.data;
-  //       // Actualiza el estado de los resultados de búsqueda por modelo
-  //       dispatch(setProducts(data.products));
-  //       console.log('hggg', + data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
+// // Función para buscar por modelo
+// const handleSearchByModel = (model) => {
+//   // Realiza la solicitud a la API para buscar por modelo
+//   axiosInstance
+//     .get(`/products?model=${model}`)
+//     .then((response) => {
+//       const data = response.data;
+//       // Actualiza el estado de los resultados de búsqueda por modelo
+//       dispatch(setProducts(data.products));
+//       console.log('hggg', + data);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// };

@@ -65,9 +65,9 @@ const Filter = ({ path, onChangeFilter }) => {
   useEffect(() => {
     dispatch(fetchBrands());
     dispatch(fetchTypes("shoes"));
-    dispatch(fetchSizes("men"));
+    dispatch(fetchSizes(pathname.slice(1)));
     dispatch(fetchColors());
-  }, [dispatch]);
+  }, [dispatch, pathname]);
 
 
   const handleFilterChange = (key, value) => {
@@ -178,26 +178,26 @@ export default Filter;
 
 
 
-  // const handleSelectChange = (event, stateKey) => {
-  //   const queryParams = {};
-  //   const { value } = event.target;
-  //   // JSON.stringify(color)
+// const handleSelectChange = (event, stateKey) => {
+//   const queryParams = {};
+//   const { value } = event.target;
+//   // JSON.stringify(color)
 
-  //   const currentSelect = {
-  //     ...selectedOptions,
-  //     [stateKey]: value,
-  //   };
+//   const currentSelect = {
+//     ...selectedOptions,
+//     [stateKey]: value,
+//   };
 
-  //   setSelectedOptions(currentSelect);
+//   setSelectedOptions(currentSelect);
 
-  //   console.log("selected", selectedOptions);
+//   console.log("selected", selectedOptions);
 
-  //   Object.keys(currentSelect).forEach((key) => {
-  //     const value = currentSelect[key];
-  //     if (value) {
-  //       queryParams[key] = value;
-  //     }
-  //   });
+//   Object.keys(currentSelect).forEach((key) => {
+//     const value = currentSelect[key];
+//     if (value) {
+//       queryParams[key] = value;
+//     }
+//   });
 
-  //   onChangeFilter(queryParams);
-  // };
+//   onChangeFilter(queryParams);
+// };

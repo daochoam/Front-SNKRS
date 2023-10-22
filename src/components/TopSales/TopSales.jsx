@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -12,8 +13,7 @@ import { fetchProducts } from "../../redux/products";
 // import { URL_FINDHOTEL } from "../../const/const";
 
 
-const TopSales = () => {
-
+const TopSales = ({ onClickTopSales }) => {
   const { pathname } = useLocation();
   const [pageGender, setPageGender] = useState(1);
 
@@ -25,9 +25,9 @@ const TopSales = () => {
 
   console.log(stocks);
 
-  useEffect (()=>{
+  useEffect(() => {
     dispatch(fetchProducts({ gender: "", page: pageGender }))
-},[dispatch, pathname, pageGender])
+  }, [dispatch, pathname, pageGender])
 
   const settings = {
     dots: true, // Muestra los indicadores (puntitos)
@@ -39,7 +39,7 @@ const TopSales = () => {
     autoplay: true,
     autoplaySpeed: 2000,
     centerMode: false,
-    
+
 
   };
 
@@ -50,31 +50,32 @@ const TopSales = () => {
       <div className={styles.carouselContainer}>
         <Slider {...settings}>
           {stocks.map((d) => (
-             <Link
-             to={`/detail/${d._id}`}
-             className={styles.containe}
-             key={d._id}
-             style={{ textDecoration: "none" }}
-           >
-            <div className={styles.cardContainer} key={d.id}>
-            <div className={styles.cardPromo} key={d.id}>
-                <div className={styles.cardPromoImage}>
-                <img
-                  src={d.image}
-                  alt={d.name}
-                />
-              </div>
-              <div className={styles.cardPromoInfo}>
-                <div>
-                  <h2>{d.model}</h2>
-                  <p>{d.type}</p>
+            <Link
+              to={`/detail/${d._id}`}
+              className={styles.containe}
+              key={d._id}
+              onClick={() => { onClickTopSales() }}
+              style={{ textDecoration: "none" }}
+            >
+              <div className={styles.cardContainer} key={d.id}>
+                <div className={styles.cardPromo} key={d.id}>
+                  <div className={styles.cardPromoImage}>
+                    <img
+                      src={d.image}
+                      alt={d.name}
+                    />
+                  </div>
+                  <div className={styles.cardPromoInfo}>
+                    <div>
+                      <h2>{d.model}</h2>
+                      <p>{d.type}</p>
+                    </div>
+                    <div>
+                      <h3>$ {d.price}</h3>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h3>$ {d.price}</h3>
-                </div>
               </div>
-            </div>
-            </div>
             </Link>
 
           ))}
@@ -85,4 +86,7 @@ const TopSales = () => {
 };
 
 
+TopSales.propTypes = {
+  onClickTopSales: PropTypes.func
+}
 export default TopSales;
