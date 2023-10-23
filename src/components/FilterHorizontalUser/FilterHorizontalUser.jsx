@@ -124,7 +124,7 @@ const FilterHorizontalUser = ({ onChangeFilter }) => {
         </select>
 
       </div>
-      
+
       <div className={styles.searchBar}>
         <button onClick={clearFilters}>Clear</button>
       </div>

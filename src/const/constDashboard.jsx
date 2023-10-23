@@ -35,11 +35,6 @@ export const MENU_USER = {
 }
 
 export const MENU_ADMIN = {
-    // statistics: {
-    //     name: 'STATISTICS',
-    //     route: '/admin/statistics',
-    //     icon: <FaChartPie />,
-    // },
     sales: {
         name: 'SALES',
         route: '/admin/sales',
@@ -49,6 +44,11 @@ export const MENU_ADMIN = {
         name: 'CUSTOMER',
         route: '/admin/customer',
         icon: <FaUserAlt />,
+    },
+    newsletter: {
+        name: 'NEWSLETTER',
+        route: '/admin/newletter',
+        icon: <FaChartPie />,
     },
     stock: {
         name: 'STOCK',

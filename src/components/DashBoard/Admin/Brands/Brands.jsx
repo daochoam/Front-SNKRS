@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchBrands } from '../../../../redux/filters'
 import { ICONS, MENU_ADMIN } from '../../../../const'
 import { ModalDataDelete } from '../../../Alerts'
-import CreateBrandModal from './CRUD/createBrand'
 
 const Brands = () => {
     const dispatch = useDispatch()
@@ -17,7 +16,7 @@ const Brands = () => {
     }, [dispatch])
 
     const handlerAddBrand = () => {
-        CreateBrandModal()
+
     }
 
     const handlerUpdateBrand = (id) => {
@@ -72,7 +71,7 @@ const Brands = () => {
                                             PHONE  </div>
                                     </span>
                                 </th>
-                                <th> 
+                                <th>
                                     {/* <button
                                     onClick={handlerAddBrand}
                                     onMouseEnter={() => handlerMouseEnter('add', null)}

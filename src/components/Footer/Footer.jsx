@@ -4,32 +4,38 @@ import { NavLink } from "react-router-dom";
 import SocialNetworks from "../SocialNetworks/SocialNetworks";
 import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 
+
 const Footer = () => {
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <section className={styles.Container}>
       <article>
         <div className={styles.section}>
           <div className={styles.sectionInfo}>
             <div className={styles.parts}>
-              <NavLink to="" className={styles.link}>BECOME A MEMBER</NavLink>
-              <NavLink to="" className={styles.link}>SEND US A FEEDBACK</NavLink>
+              <NavLink to="/men" className={styles.link} onClick={scrollToTop} >MEN</NavLink>
+              <NavLink to="/women" className={styles.link} onClick={scrollToTop}>WOMEN</NavLink>
+              <NavLink to="/kids" className={styles.link} onClick={scrollToTop}>KIDS</NavLink>
+
             </div>
             <div className={styles.parts}>
-              <NavLink to="" className={styles.link}>GET HELP</NavLink>
+              GET HELP
               <div className={styles.partsLight}>
-                <NavLink to="" className={styles.link}>Payment options</NavLink>
-                <NavLink to="" className={styles.link}>Contact Us</NavLink>
+                <NavLink to="/Payment-Options" className={styles.link} onClick={scrollToTop}>Payment options</NavLink>
+                <NavLink to="/team" className={styles.link} onClick={scrollToTop}>Contact Us</NavLink>
               </div>
             </div>
             <div className={styles.parts}>
-              <NavLink to="" className={styles.link}>
                 ABOUT SNKRS
-              </NavLink>
               <div className={styles.partsLight}>
-                <NavLink to="" className={styles.link}>
+                <NavLink to="/sustainability" className={styles.link} onClick={scrollToTop}>
                   Sustainability
                 </NavLink>
-                <NavLink to="" className={styles.link}>
+                <NavLink to="/team" className={styles.link} onClick={scrollToTop}>
                   We are team
                 </NavLink>
               </div>

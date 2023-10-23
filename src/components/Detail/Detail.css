@@ -73,7 +73,8 @@
   display: flex;
   justify-content: space-between;
 }
-.show-table-button{
+
+.show-table-button {
   background: transparent;
   border: none;
 }
@@ -156,7 +157,7 @@
   gap: 5px;
   grid-template-columns: repeat(4, 1fr);
   width: 35px;
-  animation: bounceIn 2s .5s ;
+  animation: bounceIn 2s .5s;
 }
 
 .size a {
@@ -173,7 +174,7 @@
   box-shadow: 0 5px 7px #000000b4;
   font-size: 14px;
   font-family: MontHeavy;
-  
+
 
 }
 
@@ -205,7 +206,7 @@
   background: #d9d9d9;
   text-align: center;
   font-size: 24px;
-  margin-top: -0px;
+  margin-top: 0px;
 }
 
 .bo .heart:hover {
@@ -275,7 +276,7 @@
 /*----------------- Tale--------------------- */
 /* Estilos para la tabla de valoración */
 .table-container {
-  width: 1050px;
+  width: 100%;
   margin-top: 20px;
 }
 
@@ -480,6 +481,7 @@
 .SelectedColor {
   transform: scale(1.2);
 }
+
 /* info */
 .slidi {
   position: relative;
@@ -528,11 +530,14 @@
 }
 
 .slideTrack {
-  display: flex; /* Hacer que las tarjetas se muestren en una fila horizontal */
-  overflow-x: scroll; /* Permitir el desplazamiento horizontal */
+  display: flex;
+  /* Hacer que las tarjetas se muestren en una fila horizontal */
+  overflow-x: scroll;
+  /* Permitir el desplazamiento horizontal */
   padding-bottom: 20px;
   margin: 20px 0;
-  white-space: nowrap; /* Evitar saltos de línea */
+  white-space: nowrap;
+  /* Evitar saltos de línea */
 }
 
 /* Otras reglas CSS permanecen iguales */
@@ -600,11 +605,11 @@
 
 
 .star-filled {
-  color: gold; /* Color para estrellas pintadas */
+  color: gold;
+  /* Color para estrellas pintadas */
 }
 
 .star-outline {
-  color: #ddd; /* Color para estrellas sin pintar (puedes ajustarlo) */
+  color: #ddd;
+  /* Color para estrellas sin pintar (puedes ajustarlo) */
 }
-
-

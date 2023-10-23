@@ -1,5 +1,5 @@
 export {
-    // Statistics,
+    Newsletters,
     Sales,
     Customer,
     Stock,

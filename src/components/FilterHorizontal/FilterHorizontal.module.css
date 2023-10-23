@@ -1,18 +1,18 @@
-.filter{
- display: flex;
+.filter {
+  display: flex;
   padding: 10px 16px;
   background: #D9D9D9;
   border-radius: 10px 0 0 10px;
   margin-top: 20px;
   margin-bottom: 20px;
   height: 90px;
-  width: 900px;
+  width: 100%;
   /* box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; */
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-.DataInputsProducts{
+.DataInputsProducts {
   display: flex;
   flex-direction: column;
   padding: 5px;
@@ -20,18 +20,18 @@
 }
 
 
-.DataInputsProducts{
+.DataInputsProducts {
   display: flex;
   justify-content: center;
 }
 
-.KeyData{
+.KeyData {
   font-family: MontBold;
   font-size: 16px;
   text-indent: 5px;
 }
 
-.data{
+.data {
   font-family: MontBold;
   font-size: 16px;
   border-radius: 10px;

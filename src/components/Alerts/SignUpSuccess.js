@@ -3,7 +3,7 @@ import styles from './Alerts.module.css';
 import axiosInstance from '../../utils/axiosInstance';
 import { SESSION_NOT_COOKIE } from '../../const';
 
-const SignUpSuccess = ({ setRedirect }) => {
+const SignUpSuccess = () => {
     Swal.fire({
         title: 'Your Welcome',
         text: 'Check your email to activate your account',
@@ -17,7 +17,7 @@ const SignUpSuccess = ({ setRedirect }) => {
         },
     }).then((result) => {
         if (result.isConfirmed) {
-            setRedirect(true)
+            null
         }
     });
 };

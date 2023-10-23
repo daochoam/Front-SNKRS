@@ -24,7 +24,7 @@ export const resultsMenSlice = createSlice({
 export const fetchData = () => async (dispatch) => {
   try {
 
-    const { products } = await axiosInstance.get('/products?limit=1000');
+    const { products } = await axiosInstance.get('/products');
     const rMen = products;
     dispatch(setResults(products));
     dispatch(setFilteredResultsMen([...products]));

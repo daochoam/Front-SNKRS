@@ -12,7 +12,8 @@
   position: relative;
 
 }
-.tarjetas{
+
+.tarjetas {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,14 +22,14 @@
   gap: 30px;
 }
 
-.searchBar{
+.searchBar {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.searchBar input{
+.searchBar input {
   font-size: 20px;
   text-indent: 10px;
   font-family: MontBold;
@@ -38,7 +39,7 @@
   width: 180px;
 }
 
-.searchBar button{
+.searchBar button {
   margin-left: 10px;
   min-height: 40px;
   max-height: 40px;
@@ -67,9 +68,11 @@
   box-shadow: 0 2px 7px #000000f3;
   font-family: MontHeavy;
 }
-.type p{
+
+.type p {
   color: #000;
 }
+
 .price div {
   position: absolute;
   bottom: -23px;
@@ -140,25 +143,28 @@
   color: #000;
 }
 
- .letra {
+.letra {
   font-family: MontLight;
   text-decoration: none;
   color: #000;
 }
-.containe h2{
+
+.containe h2 {
   text-decoration: none;
 }
+
 .containe {
   display: flex;
   padding: 7px 10px;
   flex-direction: column;
 
 }
+
 .card Link {
   text-decoration: none;
 }
 
-.cards a{
+.cards a {
   text-decoration: none;
 }
 
@@ -189,7 +195,7 @@
 
 /* Estilos para los botones de paginación */
 
-.paginationList{
+.paginationList {
   display: flex;
   list-style: none;
   justify-content: center;
@@ -252,22 +258,24 @@
 
 .likeButton {
   position: absolute;
-  top: 10px; 
-  right: 10px; 
+  top: 10px;
+  right: 10px;
   border: none;
   background: transparent;
   font-size: 25px;
 }
 
-.containe .circle{
+.containe .circle {
   display: flex;
   justify-content: space-between;
   font-size: 8px;
 }
-.circle img{
+
+.circle img {
   width: 70px;
   height: 20px;
 }
+
 /* Estilo para el campo de búsqueda */
 .search_bar {
   display: flex;
@@ -290,19 +298,21 @@
   height: 40px;
   justify-content: center;
   background-color: #007BFF;
-  color: #fff; 
-  
+  color: #fff;
+
   border: none;
   border-radius: 50%;
   text-align: center;
   padding: 8px 8px;
   cursor: pointer;
 }
-.search_bar button:hover{
+
+.search_bar button:hover {
   background-color: #3e9bff;
 }
+
 /* Estilo para el ícono de lupa */
 .search_icon {
-  
+
   font-size: 24px;
 }

@@ -12,7 +12,6 @@ export { default as ResetPassword } from './ResetPassword'
 export { default as UserPrevSignUp } from './UserPrevSignUp'
 export { default as Signed } from './Signed'
 
-
 export {
     ConfirmCreateProduct,
     ErrorProduct,

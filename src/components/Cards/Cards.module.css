@@ -106,15 +106,17 @@
 }
 
 .data {
- 
+
   font-family: MontHeavy;
   text-decoration: none;
   color: #000;
 }
-.colores{
+
+.colores {
   display: flex;
   justify-content: space-between;
 }
+
 .letra {
   font-family: MontLight;
   text-decoration: none;
@@ -162,10 +164,11 @@
 }
 
 .cardImage {
-  max-width: 100%;
-  min-height: 300px !important;
-  height: auto;
+  width: 100% !important;
+  height: 300px;
 }
+
+
 
 .cardLogo {
   max-width: 100%;

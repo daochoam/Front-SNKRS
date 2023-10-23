@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './views/Home/Home'
 import LateralMenu from './components/DashBoard/LateralMenu/LateralMenu';
-import { Brands, Customer, Product, Sales, Stock, TypesCategories } from './views/Admin'
+import { Newsletter, Brands, Customer, Product, Sales, Stock, TypesCategories } from './views/Admin'
 import { Favorites, Profile, Record, Shopping } from './views/User'
 import HomeViews from './views/HomeViews/HomeViews';
 import Payment from './views/Payment/Payment';
@@ -17,6 +17,10 @@ import Page404 from './views/Page404/Page404';
 
 import Genders from './views/Genders/Genders';
 import Views from './components/Reviews/Reviews';
+import Team from './views/Team/Team';
+import Sustainability from './views/Sustainability/Sustainability';
+import PaymentOptions from './views/PaymentOptions/PaymentOptions';
+
 
 
 function App() {
@@ -48,7 +52,11 @@ function App() {
         <Route path="/checkout" element={<Payment />} />
         <Route path="/payment-succes" element={<PaymentSucces />} />
         <Route path="/reviews/:id" element={<Views />} />
+        <Route path="/team" element={<Team/>} />
+        <Route path="/Sustainability" element={<Sustainability/>} />
+        <Route path="/Payment-Options" element={<PaymentOptions/>} />
 
+        
         {/* <Route path="/user" element={<DashboardUser />} /> */}
 
         {/* //?Routes USER */}
@@ -60,7 +68,7 @@ function App() {
 
         {/* //?Routes ADMIN */}
         <Route path="/admin" element={<Navigate to="/admin/sales" />} />
-        {/* <Route exact path="/admin/statistics" element={<Statistics />} /> */}
+        <Route exact path="/admin/newsletter" element={<Newsletter />} />
         <Route exact path="/admin/sales" element={<Sales />} />
         <Route exact path="/admin/customer" element={<Customer />} />
         <Route exact path="/admin/product" element={<Product />} />

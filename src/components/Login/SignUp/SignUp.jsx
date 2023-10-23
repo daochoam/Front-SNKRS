@@ -106,8 +106,8 @@ const SignUp = () => {
       })
       if (isOk) {
         localStorage.removeItem(SIGNUP_STORAGE)
-        SignUpSuccess({ redirect })
-        setRegister({ ...register, success: redirect })
+        SignUpSuccess()
+        setRegister({ ...register, success: true })
       }
     } catch (error) {
       console.log(error)

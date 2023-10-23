@@ -1,95 +1,92 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    gap: 65px;
-    margin-top: 106px;
-  }
-
-.cardPromo{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    height: 380px;
-    width: 300px;
-    border: 1px solid #9E9E9E;
-    padding: 25px;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 65px;
+  margin-top: 106px;
 }
 
-.cardPromoImage{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 240px;
-    height: 270px;
-    background-color: #F7F7F7;
+.cardPromo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 380px;
+  width: 300px;
+  border: 1px solid #9E9E9E;
+  padding: 25px;
+  cursor: pointer;
 }
 
-.cardPromoImage img{
-    width: 80%;
-    height: auto;
+.cardPromoImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 240px;
+  height: 270px;
+  background-color: #F7F7F7;
 }
 
-.cardPromo h2{
-    font-family: MontHeavy;
-    font-size: 22px;
-    font-weight: 400;
-    margin: 0;
-    width: 140px;
+.cardPromoImage img {
+  width: 80%;
+  height: auto;
+}
+
+.cardPromo h2 {
+  font-family: MontHeavy;
+  font-size: 22px;
+  font-weight: 400;
+  margin: 0;
+  width: 140px;
 
 }
 
-.cardPromo h3{
-    margin: 0;
-    font-family: MontHeavy;
-    font-size: 22px;
-    font-style: normal;
-    margin-top: 10px;
+.cardPromo h3 {
+  margin: 0;
+  font-family: MontHeavy;
+  font-size: 22px;
+  font-style: normal;
+  margin-top: 10px;
 }
 
-.cardPromo p{
-    margin: 0;
-    font-family: MontLight;
-    font-size: 14px;
+.cardPromo p {
+  margin: 0;
+  font-family: MontLight;
+  font-size: 14px;
 }
 
-.cardPromoInfo{
-    display: flex;
-    flex-direction: row;
-    margin-top: 15px;
-    justify-content: space-between;
+.cardPromoInfo {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  justify-content: space-between;
 }
-  
-  .title{
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    font-family: MontHeavy;
-    font-size: 64px;
-    line-height: 0;
-    margin: 0;
-  }
+
+.title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-family: MontHeavy;
+  font-size: 64px;
+  line-height: 0;
+  margin: 0;
+}
 
 
-  .carouselContainer {
-    width: 100%;     
+.carouselContainer {
+  width: 100%;
 
-  }
+}
 
-  .cardContainer {
-    display: flex;
-    margin: 0px 1px;
-    margin-bottom: 20px;
-  }
+.cardContainer {
+  display: flex;
+  margin: 0px auto;
+  margin-bottom: 20px;
+}
 
-  .containe {
-    text-decoration: none;
-    color: #101010;
-  }
-
-
-
+.containe {
+  text-decoration: none;
+  color: #101010;
+}

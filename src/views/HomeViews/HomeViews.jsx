@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Footer from "../../components/Footer/Footer";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import BeMember from "../../components/BeMember/BeMember";
@@ -10,7 +10,7 @@ import Carousel from "react-bootstrap/Carousel";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../../components/Cards/Cards";
-import { fetchProducts, setProducts } from "../../redux/products";
+import { fetchProducts, fetchSales, setProducts } from "../../redux/products";
 import axiosInstance from "../../utils/axiosInstance";
 import Paginated from "../../components/Paginated/Paginated";
 import TopSales from "../../components/TopSales/TopSales";
@@ -18,21 +18,25 @@ import { setBrand } from "../../redux/filters";
 
 
 const HomeViews = () => {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const locationSearch = useRef();
   const [pageGender, setPageGender] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(1); // Cambiado a una única variable de página
   const brandFilter = useSelector(({ filters }) => filters.brand)
-
-  const dispatch = useDispatch();
-
-  const stocks = useSelector(({ products }) => {
-    return products.products
-  })
-
   const pages = useSelector(({ products }) => products.pages);
+  const stocks = useSelector(({ products }) => products.products)
+  const topSales = useSelector(({ products }) => products.sales)
+  console.log("🚀 ~ file: HomeViews.jsx:31 ~ HomeViews ~ topSales:", topSales)
 
-  console.log(stocks);
+  const scrollSearchSection = () => {
+    if (locationSearch.current) {
+      locationSearch.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+
 
   useEffect(() => {
     if (searchTerm === '') {
@@ -44,10 +48,12 @@ const HomeViews = () => {
 
   useEffect(() => {
     dispatch(setBrand())
+    dispatch(fetchSales("descending"))
   }, [])
 
   const handlerSearch = (data) => {
     setSearchTerm(data)
+    scrollSearchSection()
     setPage(1);
   };
 
@@ -104,36 +110,38 @@ const HomeViews = () => {
       </div>
 
 
+      <section ref={locationSearch}>
 
-      <div className={styles.tarjetas}>
+        <div className={styles.tarjetas} >
 
 
-        <div className={styles.searchBar}>
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+          <div className={styles.searchBar} >
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            {/* <button onClick={handleSearch}>Search</button> */}
+            {searchTerm && (
+              <button onClick={clearSearch}>Clear Search</button>
+            )}
+          </div>
+
+          <Cards products={stocks} />
+
+          <Paginated
+            currentPage={pages.currentPage}
+            totalPages={pages.totalPages}
+            onChangePage={handlerChangePage}
           />
-          {/* <button onClick={handleSearch}>Search</button> */}
-          {searchTerm && (
-            <button onClick={clearSearch}>Clear Search</button>
-          )}
         </div>
-
-        <Cards products={stocks} />
-
-        <Paginated
-          currentPage={pages.currentPage}
-          totalPages={pages.totalPages}
-          onChangePage={handlerChangePage}
-        />
-      </div>
+      </section>
 
 
 
       <div className={styles.homer}>
-        <TopSales />
+        <TopSales topSales={topSales} />
       </div>
 
       <div>

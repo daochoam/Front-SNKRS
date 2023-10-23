@@ -51,9 +51,16 @@ const Product = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    if (success) {
+      setProduct(initProduct);
+      setSteps(1);
+      setSuccess(false);
+    }
+  }, [success]);
+
   const handlerPreview = () => {
     setSteps(steps - 1);
-
   }
 
   const handlerNext = () => {
@@ -92,9 +99,9 @@ const Product = () => {
       })
 
       const { _id } = await axiosInstance.post(`/products`, ProductCreate)
-      const data = await axiosInstance.put(`/products/images/${_id}`, formData)
-      ProductSuccess()
+      await axiosInstance.put(`/products/images/${_id}`, formData)
       localStorage.removeItem(PRODUCT_STORAGE)
+      ProductSuccess()
       setSuccess(true)
 
     } catch (error) {
@@ -109,10 +116,6 @@ const Product = () => {
     steps == 2 ? currentValue = { ...product, stock: [...data] } : null
     setProduct(currentValue)
     localStorage.setItem(PRODUCT_STORAGE, JSON.stringify(currentValue));
-  }
-
-  if (success) {
-    return <Navigate to={SESSION_NOT_COOKIE} />;
   }
 
   return (
