@@ -43,8 +43,9 @@
 .product-images {
   display: flex;
   flex-direction: column;
-  height: 500px;
-
+  height: auto;
+  justify-content: flex-start;
+  gap: 17px;
 }
 
 
@@ -94,9 +95,26 @@
   justify-content: center;
   align-items: center;
   background-color: #f7f7f7;
-  height: 485px;
+  height: 525px;
   width: 400px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  align-content: center;
+}
+.product-main-image .im4 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta la imagen para llenar la caja sin distorsión */
+}
+.product-main-image .im4:hover {
+  
+  transition: transform 1s; /* Agrega una transición suave */
+  border-radius: 20px;
+  z-index: 9;
+}
+.zapas{
+  
+  display: flex;
+  justify-content: space-between;
 }
 
 .product-main-image img {
@@ -104,9 +122,20 @@
   justify-content: center;
   align-content: center;
   width: auto;
-  height: 360px;
+  height: 370px;
   position: relative;
+  flex-direction: column;
+  align-items: center;
 }
+.im0, .im1, .im2, .im3 {
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.im0:hover, .im1:hover, .im2:hover, .im3:hover{
+  border-color: #007bff6e; /* Color de resaltado al pasar el ratón por encima */
+}
+
 
 .for {
   font-family: MontLight;
@@ -125,8 +154,7 @@
 .info h2 {
   font-family: MontLight;
 }
-
-.product-info .name {
+.zapas .name {
   font-size: 38px;
 
   margin: 0px;
@@ -489,7 +517,7 @@
   overflow: hidden;
   margin: 20px 0;
   text-align: center;
-  margin-top: 90px;
+  margin-top: 30px;
 }
 
 .slidi h1 {
@@ -560,7 +588,7 @@
   flex-shrink: 0;
   flex-grow: 0;
   margin: 20px;
-  width: 300px;
+  width: 320px;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -582,17 +610,23 @@
 }
 
 .comment {
-  padding: 6px;
-  width: 100%;
+  padding: 2px;
   box-sizing: border-box;
+  width: 100% !important;
+  max-height: 200px;
+  word-wrap: break-word;
 }
 
 .comment h3 {
   font-family: MontRegular;
 }
 
-.comment p {
-  font-family: MontLight;
+.comment-message {
+  max-width: 100%;
+  word-wrap: break-word;
+  min-height: 120px;
+  text-justify: distribute-all-lines;
+  border: none;
 }
 
 .stars {

@@ -115,7 +115,7 @@ const Reviews = ({ Product_id, brand, images, model }) => {
     }
   }, []);
   console.log("Review=", review.review);
-  
+
   useEffect(() => {
     dispatch(fetchUserById());
     // eslint-disable-next-line react-hooks/exhaustive-deps

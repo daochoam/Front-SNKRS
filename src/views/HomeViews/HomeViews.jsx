@@ -15,6 +15,8 @@ import axiosInstance from "../../utils/axiosInstance";
 import Paginated from "../../components/Paginated/Paginated";
 import TopSales from "../../components/TopSales/TopSales";
 import { setBrand } from "../../redux/filters";
+import { MdOutlineFilterFrames } from "react-icons/md";
+import Filters from "../../components/Filters/Filters";
 
 
 const HomeViews = () => {
@@ -24,6 +26,7 @@ const HomeViews = () => {
   const [pageGender, setPageGender] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(1); // Cambiado a una única variable de página
+
   const brandFilter = useSelector(({ filters }) => filters.brand)
   const pages = useSelector(({ products }) => products.pages);
   const stocks = useSelector(({ products }) => products.products)
@@ -56,6 +59,7 @@ const HomeViews = () => {
     scrollSearchSection()
     setPage(1);
   };
+
 
 
   const handlerChangePage = (newPage) => {
@@ -127,7 +131,7 @@ const HomeViews = () => {
               <button onClick={clearSearch}>Clear Search</button>
             )}
           </div>
-
+          {/* <Filters /> */}
           <Cards products={stocks} />
 
           <Paginated
@@ -135,6 +139,7 @@ const HomeViews = () => {
             totalPages={pages.totalPages}
             onChangePage={handlerChangePage}
           />
+
         </div>
       </section>
 

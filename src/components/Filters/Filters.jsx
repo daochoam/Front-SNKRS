@@ -4,15 +4,8 @@ import React, { useState } from "react";
 import logo from "../../assets/Image/Logo.png";
 import { BsFillArrowUpCircleFill, BsFillArrowDownCircleFill } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    setSortBy,
-    setProductCategory,
-    setProductType,
-    setSize,
-    setColor,
-} from '../../redux/filtersSlice';
 
-import styles from "./Filter.module.css";
+import styles from "./Filters.module.css";
 
 const Filter = () => {
     const [isOpen1, setIsOpen1] = useState(false);
@@ -33,7 +26,6 @@ const Filter = () => {
     const handleOptionClick1 = (option) => {
         setSelectedOption1(option);
         setIsOpen1(false);
-        dispatch(setSortBy(option));
     };
 
     // Repite el mismo patrón para los desplegables 2, 3 y 4
@@ -49,7 +41,6 @@ const Filter = () => {
     const handleOptionClick2 = (option) => {
         setSelectedOption2(option);
         setIsOpen2(false);
-        dispatch(setProductCategory(option));
     };
 
     // Repite el mismo patrón para 3
@@ -65,7 +56,6 @@ const Filter = () => {
     const handleOptionClick3 = (option) => {
         setSelectedOption3(option);
         setIsOpen3(false);
-        dispatch(setProductType(option));
     };
     // Repite el mismo patrón para 4
     const [isOpen4, setIsOpen4] = useState(false);
@@ -80,7 +70,6 @@ const Filter = () => {
     const handleOptionClick4 = (option) => {
         setSelectedOption4(option);
         setIsOpen4(false);
-        dispatch(setSize(option));
     };
     // Repite el mismo patrón para 5
     const [isOpen5, setIsOpen5] = useState(false);
@@ -95,7 +84,6 @@ const Filter = () => {
     const handleOptionClick5 = (option) => {
         setSelectedOption5(option);
         setIsOpen5(false);
-        dispatch(setColor(option));
     };
 
 
